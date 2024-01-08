@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BidangKegiatan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(InstansiTableSeeder::class);
+        $this->call(AlatPendukungTableSeeder::class);
+        $this->call(BidangKegiatanTableSeeder::class);
     }
 }

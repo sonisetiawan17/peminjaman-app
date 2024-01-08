@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
     {
         $super_admin = User::create([
             'name' => 'Super Admin',
-            'email' => 'superadmin@sipinjam.com',
+            'email' => 'superadmin@gmail.com',
             'password' => bcrypt('superadmin123'),
             
         ]);
@@ -25,7 +25,7 @@ class UserTableSeeder extends Seeder
 
         $admin = User::create([
             'name' => 'Admin',
-            'email' => 'admin@sipinjam.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
             
         ]);

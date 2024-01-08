@@ -52,6 +52,7 @@ class User extends Authenticatable
 
     public function instansi()
     {
-        return $this->hasOne('App\Models\Instansi', 'id', 'instansi_id');
+        // return $this->hasOne('App\Models\Instansi', 'id', 'instansi_id');
+        return $this->belongsTo(Instansi::class, 'instansi_id');
     }
 }

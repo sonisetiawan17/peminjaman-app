@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Instansi extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama_organisasi',
-    ];
+    protected $table = 'instansi';
 
-    public function users()
+    protected $primaryKey = 'id_instansi';
+
+    protected $fillable = ['nama_instansi'];
+
+    public function user()
     {
-        return $this->hasMany('App\Models\User', 'instansi_id', 'id');
+        // return $this->hasOne('App\Models\Instansi', 'id', 'instansi_id');
+        return $this->hasMany(User::class, 'instansi_id');
     }
 }

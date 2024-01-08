@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'instansi_id' => 'required',
+            'instansi_id' => 'required|integer',
             'nik' => ['required', 'string'],
             'no_telp' => ['required', 'string'],
             'alamat' => ['required', 'string'],
