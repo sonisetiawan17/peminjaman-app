@@ -5,7 +5,7 @@
 	$headerTopMenu = (!empty($headerTopMenu)) ? $headerTopMenu : '';
 @endphp
 <!-- begin #header -->
-<div id="header" class="header {{ $headerClass }}">
+<div id="header" class="header {{ $headerClass }} shadow-md">
 	<!-- begin navbar-header -->
 	<div class="navbar-header">
 		@if ($sidebarTwo)

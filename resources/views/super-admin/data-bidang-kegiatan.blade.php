@@ -56,7 +56,7 @@
                         </thead>
                         <tbody>
                             @php $no=1; @endphp
-                            @foreach ($alat as $i)
+                            @foreach ($bidang as $i)
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $i->nama_bidang }}</td>

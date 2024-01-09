@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
 	@include('includes.head')
+	{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> --}}
 </head>
 @php
 	$bodyClass = (!empty($boxedLayout)) ? 'boxed-layout' : '';
@@ -25,7 +26,7 @@
 	$contentClass = (!empty($contentFullWidth) || !empty($contentFullHeight)) ? 'content-full-width ' : '';
 	$contentClass .= (!empty($contentInverseMode)) ? 'content-inverse-mode ' : '';
 @endphp
-<body class="{{ $bodyClass }}">
+<body class="{{ $bodyClass }}" style="background-color: rgb(239, 239, 239)">
 	@include('includes.component.page-loader')
 	
 	<div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed {{ $pageContainerClass }}">
@@ -44,12 +45,15 @@
 		
 		@includeWhen($footer, 'includes.footer')
 		
-		@include('includes.component.theme-panel')
+		{{-- @include('includes.component.theme-panel') --}}
 		
 		@include('includes.component.scroll-top-btn')
 		
 	</div>
 	
 	@include('includes.page-js')
+
+	{{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script> --}}
 </body>
 </html>

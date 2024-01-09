@@ -39,7 +39,7 @@ return [
 			'url' => '/superadmin/alat-pendukung',
 			'title' => 'Alat Pendukung',
       ],[
-			'url' => '/superadmin/blok',
+			'url' => '/superadmin/blok-ruangan',
 			'title' => 'Blok Ruangan',
       ],[
 			'url' => '/superadmin/bidang-kegiatan',

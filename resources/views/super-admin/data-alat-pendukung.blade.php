@@ -9,6 +9,9 @@
 @endpush
 
 @section('content')
+    @php
+        $totalAlat = App\Models\AlatPendukung::count();
+    @endphp
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
@@ -126,12 +129,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post" action="{{ route('superadmin.ubah_alat', $i->id_alat_pendukung) }}">
+                    <form method="post" action="{{ $totalAlat > 0 ? route('superadmin.ubah_alat', $i->id_alat_pendukung) : '' }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Alat</label>
                             <div class="col-md-7">
-                                <input required name="nama_alat" type="text" class="form-control rounded-md" placeholder="" />
+                                <input required name="nama_alat" type="text" class="form-control rounded-md" placeholder="" value="{{ $totalAlat > 0 ? old('nama_alat', $i->nama_alat) : '' }}" />
                             </div>
                         </div>
                 </div>

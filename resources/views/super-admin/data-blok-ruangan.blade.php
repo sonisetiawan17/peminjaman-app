@@ -13,11 +13,11 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="javascript:;">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Data Instansi</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Blok Ruangan</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Data Instansi <small></small></h1>
+    <h1 class="page-header">Blok Ruangan <small></small></h1>
     <!-- end page-header -->
     <!-- begin row -->
     <div class="row">
@@ -51,25 +51,25 @@
                             <tr>
                                 <th width="1%">No</th>
                                 <th class="text-nowrap">Nama Instansi</th>
-                                {{-- <th class="text-nowrap">Alamat</th> --}}
+                                <th class="text-nowrap">Alamat</th>
                                 <th class="text-nowrap" width="10%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $no=1; @endphp
-                            @foreach ($instansi as $i)
+                            @foreach ($ruangan as $i)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $i->nama_instansi }}</td>
-                                    {{-- <td>{{ $i->alamat_instansi }}</td> --}}
+                                    <td>{{ $i->tgl_mulai }}</td>
+                                    <td>{{ $i->tgl_selesai }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-nama_instansi="{{ $i->nama_instansi }}"
-                                                data-alamat_instansi="{{ $i->alamat_instansi }}" class="btn btn-white"><i
+                                                data-target="#isimodal" data-nama_instansi="{{ $i->tgl_mulai }}"
+                                                data-alamat_instansi="{{ $i->tgl_selesai }}" class="btn btn-white"><i
                                                     class="fa fa-edit text-blue"></i></a>
 
-                                            <form action="{{ route('superadmin.hapus_instansi', $i->id_instansi) }}"
+                                            <form 
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -96,21 +96,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Instansi</h4>
+                    <h4 class="modal-title">Tambah Data Blok Ruangan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('superadmin.simpan_instansi') }}">
+                    <form method="post" action="{{ route('superadmin.simpan_blok_ruangan') }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Instansi</label>
                             <div class="col-md-7">
                                 <input required name="nama_instansi" type="text" class="form-control" placeholder="" />
                             </div>
-                            {{-- <label class="col-md-5 col-form-label">Alamat Lengkap</label>
+                            <label class="col-md-5 col-form-label">Alamat Lengkap</label>
                             <div class="col-md-7 mt-3">
                                 <textarea required name="alamat_instansi" class="form-control"></textarea>
-                            </div> --}}
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -129,11 +129,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ubah Data Instansi</h4>
+                    <h4 class="modal-title">Ubah Data Blok Ruangan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post" action="{{ route('superadmin.ubah_instansi', $i->id_instansi) }}">
+                    <form method="post">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Instansi</label>
@@ -141,10 +141,10 @@
                                 <input required name="nama_instansi" id="nama_instansi" type="text" class="form-control"
                                     placeholder="" />
                             </div>
-                            {{-- <label class="col-md-5 col-form-label">Alamat Lengkap</label>
+                            <label class="col-md-5 col-form-label">Alamat Lengkap</label>
                             <div class="col-md-7">
                                 <textarea required name="alamat_instansi" id="alamat_instansi" class="form-control"></textarea>
-                            </div> --}}
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
