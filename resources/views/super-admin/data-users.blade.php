@@ -15,22 +15,22 @@
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="javascript:;">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Data Users</a></li>
+        <li class="breadcrumb-item font-semibold"><a href="{{ route('superadmin.index') }}">Beranda</a></li>
+        <li class="breadcrumb-item font-normal cursor-default">Data Users</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
     <h1 class="page-header">Data Users<small></small></h1>
     <!-- end page-header -->
     <!-- begin row -->
-    <div class="row w-100 shadow-sm">
+    <div class="row">
         <!-- begin col-112 -->
         <div class="col-xl-12">
             <!-- begin panel -->
             <div class="panel panel-inverse">
                 <!-- begin panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">DataTable</h4>
+                    <h4 class="panel-title">Users</h4>
                 </div>
 
                 <!-- end panel-heading -->
@@ -70,9 +70,15 @@
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-nama_instansi="{{ $i->name }}"
-                                                data-nama_instansi="{{ $i->email }}"
-                                                data-nama_instansi="{{ $i->no_telp }}" class="btn btn-white"><i
+                                                data-target="#isimodal" 
+                                                data-name="{{ $i->name }}"
+                                                data-email="{{ $i->email }}"
+                                                data-instansi_id="{{ $i->instansi_id }}"
+                                                data-nik="{{ $i->nik }}"
+                                                data-no_telp="{{ $i->no_telp }}"
+                                                data-alamat="{{ $i->alamat }}"
+                                                data-nama_organisasi="{{ $i->nama_organisasi }}" 
+                                                class="btn btn-white"><i
                                                     class="fa fa-edit text-blue"></i></a>
 
                                             <form action="{{ route('superadmin.hapus_users', $i->id) }}" method="POST">
@@ -106,71 +112,58 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body mx-3" id="tampil_modal">
-                    <form method="post" action="{{ $totalUser > 0 ? route('superadmin.ubah_users', $i->id) : '' }}">
+                    <form method="post" action="{{ route('superadmin.ubah_users') }}">
                         @csrf
                         <div class="form-group row m-b-15">
+                            <input type="hidden" id="id" name="id">
                             <label class="col-md-5 col-form-label">Nama</label>
                             <div class="col-md-7">
-                                <input required name="name" type="text" class="form-control rounded-md"
-                                    value="{{ $totalUser > 0 ? old('name', $i->name) : '' }}" placeholder="" />
-                            </div>
-
-                            <label class="col-md-5 col-form-label mt-3">Email</label>
-                            <div class="col-md-7 mt-3">
-                                <input required name="email" type="text" class="form-control rounded-md"
-                                    value="{{ $totalUser > 0 ? old('email', $i->email) : '' }}" placeholder="" />
-                            </div>
-
-                            <label class="col-md-5 col-form-label mt-3">Password</label>
-                            <div class="col-md-7 mt-3">
-                                <input required name="password" type="password" class="form-control rounded-md"
-                                    placeholder="" />
-                            </div>
-
-                            <label class="col-md-5 col-form-label mt-3">NIK</label>
-                            <div class="col-md-7 mt-3">
-                                <input required name="nik" type="text" class="form-control rounded-md"
-                                    value="{{ $totalUser > 0 ? old('nik', $i->nik) : '' }}" placeholder="" />
-                            </div>
-
-                            <label class="col-md-5 col-form-label mt-3">No Telp</label>
-                            <div class="col-md-7 mt-3">
-                                <input required name="no_telp" type="text" class="form-control rounded-md"
-                                    value="{{ $totalUser > 0 ? old('no_telp', $i->no_telp) : '' }}" placeholder="" />
-                            </div>
-
-                            <label class="col-md-5 col-form-label mt-3">Alamat</label>
-                            <div class="col-md-7 mt-3">
-                                <input required name="alamat" type="text" class="form-control rounded-md"
-                                    value="{{ $totalUser > 0 ? old('alamat', $i->alamat) : '' }}" placeholder="" />
-                            </div>
-
-                            <label class="col-md-5 col-form-label mt-3">Nama Organisasi</label>
-                            <div class="col-md-7 mt-3">
-                                <input required name="nama_organisasi" type="text" class="form-control rounded-md"
-                                    value="{{ $totalUser > 0 ? old('nama_organisasi', $i->nama_organisasi) : '' }}"
-                                    placeholder="" />
+                                <input required id="name" name="name" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
 
                             <label class="col-md-5 col-form-label mt-3">Instansi</label>
                             <div class="col-md-7 mt-3">
-                                <select class="form-control py-2" name="instansi_id">
-                                    <option value="1"
-                                        {{ $totalUser > 0 ? (old('instansi_id', $i->instansi_id) == '1' ? 'selected' : '') : '' }}>
-                                        Instansi 1</option>
-                                    <option value="2"
-                                        {{ $totalUser > 0 ? (old('instansi_id', $i->instansi_id) == '2' ? 'selected' : '') : '' }}>
-                                        Instansi 2</option>
-                                    <option value="3"
-                                        {{ $totalUser > 0 ? (old('instansi_id', $i->instansi_id) == '3' ? 'selected' : '') : '' }}>
-                                        Instansi 3</option>
+                                <select class="border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md w-full" id="instansi_id" name="instansi_id">
+                                    <option value="1">Instansi 1</option>
+                                    <option value="2">Instansi 2</option>
+                                    <option value="3">Instansi 3</option>
                                 </select>
+                            </div>
+
+                            <label class="col-md-5 col-form-label mt-3">Email</label>
+                            <div class="col-md-7 mt-3">
+                                <input required id="email" name="email" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
+
+                            <label class="col-md-5 col-form-label mt-3">Password</label>
+                            <div class="col-md-7 mt-3">
+                                <input required name="password" type="password" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
+
+                            <label class="col-md-5 col-form-label mt-3">NIK</label>
+                            <div class="col-md-7 mt-3">
+                                <input required id="nik" name="nik" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
+
+                            <label class="col-md-5 col-form-label mt-3">No Telp</label>
+                            <div class="col-md-7 mt-3">
+                                <input required id="no_telp" name="no_telp" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
+
+                            <label class="col-md-5 col-form-label mt-3">Alamat</label>
+                            <div class="col-md-7 mt-3">
+                                <input required id="alamat" name="alamat" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
+
+                            <label class="col-md-5 col-form-label mt-3">Nama Organisasi</label>
+                            <div class="col-md-7 mt-3">
+                                <input required id="nama_organisasi" name="nama_organisasi" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
                         </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-dark" data-dismiss="modal">Tutup</a>
-                    <button type="submit" class="btn btn-success">Ubah Data</button>
+                <div class="modal-footer font-semibold text-sm">
+                    <a href="javascript:;" class="button-ghost" data-dismiss="modal">Tutup</a>
+                    <button type="submit" class="button-primary">Ubah Data</button>
                 </div>
                 </form>
             </div>
@@ -184,17 +177,20 @@
     <script type="text/javascript">
         $(document).on("click", "#modal_show", function() {
             var name = $(this).data('name');
-            var instansi_id = $(this).data('instansi_id');
             var email = $(this).data('email');
+            var instansi_id = $(this).data('instansi_id');
+            var nik = $(this).data('nik');
             var no_telp = $(this).data('no_telp');
+            var alamat = $(this).data('alamat');
             var nama_organisasi = $(this).data('nama_organisasi');
 
             $("#tampil_modal #name").val(name);
-            $("#tampil_modal #instansi_id").val(instansi_id);
             $("#tampil_modal #email").val(email);
+            $("#tampil_modal #instansi_id").val(instansi_id);
+            $("#tampil_modal #nik").val(nik);
             $("#tampil_modal #no_telp").val(no_telp);
+            $("#tampil_modal #alamat").val(alamat);
             $("#tampil_modal #nama_organisasi").val(nama_organisasi);
-
         })
     </script>
     <script src="/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>

@@ -127,11 +127,11 @@ class CRUDController extends Controller
         return redirect('superadmin/instansi')->with('sukses','Data Berhasil dihapus!');
     }
 
-    public function ubah_instansi(Request $request, $id_instansi)
+    public function ubah_instansi(Request $request)
     {
+        $id_instansi = $request->id_instansi;
         $data = Instansi::find($id_instansi);
         $data->nama_instansi=$request->nama_instansi;
-        // $data->alamat_instansi=$request->alamat_instansi;
         $simpan = $data->update();
         return redirect('superadmin/instansi')->with('sukses','Data Berhasil diubah!');
     
@@ -139,7 +139,7 @@ class CRUDController extends Controller
 
     // ============= ALAT PENDUKUNG =============
     public function index_alat() {
-        $alat = AlatPendukung::latest()->paginate(10);
+        $alat = AlatPendukung::get();
         return view('super-admin.data-alat-pendukung', compact('alat'));
     }
 
@@ -198,7 +198,7 @@ class CRUDController extends Controller
 
     // ============= BIDANG KEGIATAN =============
     public function index_bidang_kegiatan() {
-        $bidang = BidangKegiatan::latest()->paginate(10);
+        $bidang = BidangKegiatan::get();
         return view('super-admin.data-bidang-kegiatan', compact('bidang'));
     }
 
@@ -220,9 +220,8 @@ class CRUDController extends Controller
     public function ubah_bidang_kegiatan(Request $request, $id_bidang_kegiatan)
     {
         $data = BidangKegiatan::find($id_bidang_kegiatan);
-        $data->nama_bidang = $request->nama_bidang;
+        $data->nama_bidang=$request->nama_bidang;
         $simpan = $data->update();
         return redirect('superadmin/bidang-kegiatan')->with('sukses','Data Berhasil diubah!');
-    
     }
 }

@@ -12,8 +12,8 @@
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="javascript:;">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Data Instansi</a></li>
+        <li class="breadcrumb-item font-semibold"><a href="{{ route('superadmin.index') }}">Beranda</a></li>
+        <li class="breadcrumb-item font-normal cursor-default">Data Instansi</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -27,7 +27,7 @@
             <div class="panel panel-inverse">
                 <!-- begin panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">DataTable</h4>
+                    <h4 class="panel-title">Instansi</h4>
                     <div class="panel-heading-btn">
                         <a href="#modal-dialog" class="btn btn-sm btn-primary" data-toggle="modal"><i
                                 class="fa fa-plus"></i> Tambah Data</a>
@@ -37,21 +37,12 @@
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
                 <div class="panel-body">
-
-                    @if (session('sukses'))
-                        <div class="alert alert-success fade show">
-                            <span class="close" data-dismiss="alert">×</span>
-
-                            {{ session('sukses') }}
-                        </div>
-                    @endif
                     <table id="data-table-select" class="table table-striped table-bordered table-td-valign-middle"
                         width="100%">
                         <thead>
                             <tr>
                                 <th width="1%">No</th>
                                 <th class="text-nowrap">Nama Instansi</th>
-                                {{-- <th class="text-nowrap">Alamat</th> --}}
                                 <th class="text-nowrap" width="10%">Aksi</th>
                             </tr>
                         </thead>
@@ -61,21 +52,20 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $i->nama_instansi }}</td>
-                                    {{-- <td>{{ $i->alamat_instansi }}</td> --}}
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-nama_instansi="{{ $i->nama_instansi }}"
-                                                data-alamat_instansi="{{ $i->alamat_instansi }}" class="btn btn-white"><i
+                                                data-target="#isimodal" data-id_instansi="{{ $i->id_instansi }}"
+                                                data-nama_instansi="{{ $i->nama_instansi }}" class="btn btn-white"><i
                                                     class="fa fa-edit text-blue"></i></a>
 
                                             <form action="{{ route('superadmin.hapus_instansi', $i->id_instansi) }}"
-                                                method="POST">
+                                                method="POST" id="delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-white title="Hapus Data"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
-                                                        class="fa fa-trash text-red"></i></button>
+                                                <button type="submit" class="btn btn-white title="Hapus Data" id="delete">
+                                                    <i class="fa fa-trash text-red"></i>
+                                                </button>
                                             </form>
                                         </div>
                                     </td>
@@ -105,17 +95,14 @@
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Instansi</label>
                             <div class="col-md-7">
-                                <input required name="nama_instansi" type="text" class="form-control" placeholder="" />
+                                <input required name="nama_instansi" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
-                            {{-- <label class="col-md-5 col-form-label">Alamat Lengkap</label>
-                            <div class="col-md-7 mt-3">
-                                <textarea required name="alamat_instansi" class="form-control"></textarea>
-                            </div> --}}
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
-                    <button type="submit" class="btn btn-success">Tambah</button>
+                    <a href="javascript:;" class="button-ghost" data-dismiss="modal">Tutup</a>
+                    <button type="submit" class="button-primary">Tambah</button>
                 </div>
                 </form>
             </div>
@@ -133,23 +120,20 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post" action="{{ route('superadmin.ubah_instansi', $i->id_instansi) }}">
+                    <form method="post" action="{{ route('superadmin.ubah_instansi') }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Instansi</label>
                             <div class="col-md-7">
-                                <input required name="nama_instansi" id="nama_instansi" type="text" class="form-control"
-                                    placeholder="" />
+                                <input type="hidden" id="id_instansi" name="id_instansi">
+                                <input required name="nama_instansi" id="nama_instansi" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
-                            {{-- <label class="col-md-5 col-form-label">Alamat Lengkap</label>
-                            <div class="col-md-7">
-                                <textarea required name="alamat_instansi" id="alamat_instansi" class="form-control"></textarea>
-                            </div> --}}
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
-                    <button type="submit" class="btn btn-dark">Ubah Data</button>
+                    <a href="javascript:;" class="button-ghost" data-dismiss="modal">Tutup</a>
+                    <button type="submit" class="button-primary">Ubah Data</button>
                 </div>
                 </form>
             </div>
@@ -162,11 +146,11 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).on("click", "#modal_show", function() {
+            var id_instansi = $(this).data('id_instansi');
             var nama_instansi = $(this).data('nama_instansi');
-            var alamat_instansi = $(this).data('alamat_instansi');
 
+            $("#tampil_modal #id_instansi").val(id_instansi);
             $("#tampil_modal #nama_instansi").val(nama_instansi);
-            $("#tampil_modal #alamat_instansi").val(alamat_instansi);
 
         })
     </script>

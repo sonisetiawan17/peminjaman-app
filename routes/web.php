@@ -43,12 +43,12 @@ Route::middleware(['auth', 'role:super-admin'])->prefix('superadmin')->name('sup
     Route::get('/users', [CRUDController::class, 'index_users'])->name('index_users');
     Route::post('/simpanUsers', [CRUDController::class, 'simpan_users'])->name('simpan_users');
     Route::delete('/hapusUsers/{id}', [CRUDController::class, 'hapus_users'])->name('hapus_users');
-    Route::post('/ubahUsers/{id}', [CRUDController::class, 'ubah_users'])->name('ubah_users');
+    Route::post('/ubahUsers', [CRUDController::class, 'ubah_users'])->name('ubah_users');
 
     Route::get('/instansi', [CRUDController::class, 'index_instansi'])->name('index_instansi');
     Route::post('/simpanInstansi', [CRUDController::class, 'simpan_instansi'])->name('simpan_instansi');
     Route::delete('/hapusInstansi/{id_instansi}', [CRUDController::class, 'hapus_instansi'])->name('hapus_instansi');
-    Route::post('/ubahInstansi/{id_instansi}', [CRUDController::class, 'ubah_instansi'])->name('ubah_instansi');
+    Route::post('/ubahInstansi', [CRUDController::class, 'ubah_instansi'])->name('ubah_instansi');
 
     Route::get('/alat-pendukung', [CRUDController::class, 'index_alat'])->name('index_alat');
     Route::post('/simpanAlatPendukung', [CRUDController::class, 'simpan_alat'])->name('simpan_alat');
@@ -61,9 +61,9 @@ Route::middleware(['auth', 'role:super-admin'])->prefix('superadmin')->name('sup
     Route::post('/ubahBlokRuangan/{id_blok_ruangan}', [CRUDController::class, 'ubah_blok_ruangan'])->name('ubah_blok_ruangan');
 
     Route::get('/bidang-kegiatan', [CRUDController::class, 'index_bidang_kegiatan'])->name('bidang_kegiatan');
-    Route::post('/simpanBidangKegiatan', [CRUDController::class, 'simpan_bidang_kegiatan'])->name('simpan_bidang_kegiatan');
-    Route::delete('/hapusBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'hapus_bidang_kegiatan'])->name('hapus_bidang_kegiatan');
-    Route::post('/ubahBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'ubah_bidang_kegiatan'])->name('ubah_bidang_kegiatan');
+    Route::post('/simpanBidangKegiatan', [CRUDController::class, 'simpan_bidang_kegiatan'])->name('simpan_bidang');
+    Route::delete('/hapusBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'hapus_bidang_kegiatan'])->name('hapus_bidang');
+    Route::post('/ubahBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'ubah_bidang_kegiatan'])->name('ubah_bidang');
 });
 
 require __DIR__.'/auth.php';

@@ -1,6 +1,6 @@
 @extends('layouts.super')
 
-@section('title', 'Data Bidang Kegiatan')
+@section('title', 'Data Alat Pendukung')
 
 @push('css')
     <link href="/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -9,6 +9,9 @@
 @endpush
 
 @section('content')
+    @php
+        $totalBidang = App\Models\BidangKegiatan::count();
+    @endphp
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
@@ -63,10 +66,10 @@
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-nama_instansi="{{ $i->nama_bidang }}" class="btn btn-white"><i
-                                                    class="fa fa-edit text-blue"></i></a>
+                                                data-target="#isimodal" data-nama_bidang="{{ $i->nama_bidang }}"
+                                                class="btn btn-white"><i class="fa fa-edit text-blue"></i></a>
 
-                                            <form action="{{ route('superadmin.hapus_alat', $i->id_bidang_kegiatan) }}"
+                                            <form action="{{ route('superadmin.hapus_bidang', $i->id_bidang_kegiatan) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -93,16 +96,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Bidang Kegiatan</h4>
+                    <h4 class="modal-title">Tambah Data Alat Pendukung</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('superadmin.simpan_bidang_kegiatan') }}">
+                    <form method="post" action="{{ route('superadmin.simpan_bidang') }}">
                         @csrf
                         <div class="form-group row m-b-15">
-                            <label class="col-md-5 col-form-label">Bidang Kegiatan</label>
+                            <label class="col-md-5 col-form-label">Nama Bidang Kegiatan</label>
                             <div class="col-md-7">
-                                <input required name="nama_bidang" type="text" class="form-control rounded-md" placeholder="" />
+                                <input required name="nama_bidang" type="text" class="form-control" placeholder="" />
                             </div>
                         </div>
                 </div>
@@ -126,12 +129,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post" action="{{ route('superadmin.ubah_bidang_kegiatan', $i->id_bidang_kegiatan) }}">
+                    <form method="post"
+                        action="{{ $totalBidang > 0 ? route('superadmin.ubah_bidang', $i->id_bidang_kegiatan) : '' }}">
                         @csrf
                         <div class="form-group row m-b-15">
-                            <label class="col-md-5 col-form-label">Nama Bidang Kegiatan</label>
+                            <label class="col-md-5 col-form-label">Nama Bidang</label>
                             <div class="col-md-7">
-                                <input required name="nama_bidang" type="text" class="form-control rounded-md" placeholder="" />
+                                <input required name="nama_bidang" id="nama_bidang" type="text" class="form-control rounded-md"
+                                    placeholder="" value="{{ $totalBidang > 0 ? old('nama_bidang', $i->nama_bidang) : '' }}" />
                             </div>
                         </div>
                 </div>

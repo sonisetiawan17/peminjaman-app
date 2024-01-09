@@ -66,8 +66,8 @@
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-nama_instansi="{{ $i->nama_alat }}" class="btn btn-white"><i
-                                                    class="fa fa-edit text-blue"></i></a>
+                                                data-target="#isimodal" data-nama_alat="{{ $i->nama_alat }}"
+                                                class="btn btn-white"><i class="fa fa-edit text-blue"></i></a>
 
                                             <form action="{{ route('superadmin.hapus_alat', $i->id_alat_pendukung) }}"
                                                 method="POST">
@@ -105,7 +105,7 @@
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Alat Pendukung</label>
                             <div class="col-md-7">
-                                <input required name="nama_alat" type="text" class="form-control rounded-md" placeholder="" />
+                                <input required name="nama_alat" type="text" class="form-control" placeholder="" />
                             </div>
                         </div>
                 </div>
@@ -129,12 +129,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post" action="{{ $totalAlat > 0 ? route('superadmin.ubah_alat', $i->id_alat_pendukung) : '' }}">
+                    <form method="post"
+                        action="{{ $totalAlat > 0 ? route('superadmin.ubah_alat', $i->id_alat_pendukung) : '' }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Alat</label>
                             <div class="col-md-7">
-                                <input required name="nama_alat" type="text" class="form-control rounded-md" placeholder="" value="{{ $totalAlat > 0 ? old('nama_alat', $i->nama_alat) : '' }}" />
+                                <input required name="nama_alat" id="nama_alat" type="text" class="form-control rounded-md"
+                                    placeholder="" value="{{ $totalAlat > 0 ? old('nama_alat', $i->nama_alat) : '' }}" />
                             </div>
                         </div>
                 </div>
@@ -155,7 +157,7 @@
         $(document).on("click", "#modal_show", function() {
             var nama_alat = $(this).data('nama_alat');
 
-            $("#tampil_modal #nama_instansi").val(nama_instansi);
+            $("#tampil_modal #nama_alat").val(nama_alat);
 
         })
     </script>
