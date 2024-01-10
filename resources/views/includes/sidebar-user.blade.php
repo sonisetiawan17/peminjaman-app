@@ -16,8 +16,8 @@
 					</div>
 					<div class="info">
 						<b class="caret pull-right"></b>
-						Sean Ngu
-						<small>Front end developer</small>
+						{{ auth::user()->name }}
+						<small>{{ auth::user()->instansi->nama_instansi }}</small>
 					</div>
 				</a>
 			</li>

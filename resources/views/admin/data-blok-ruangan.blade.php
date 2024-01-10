@@ -1,4 +1,4 @@
-@extends('layouts.super')
+@extends('layouts.default')
 
 @section('title', 'Data Jadwal')
 
@@ -69,7 +69,7 @@
                                                 class="btn btn-white"><i
                                                     class="fa fa-edit text-blue"></i></a>
 
-                                            <form action="{{ route('superadmin.hapus_blok_ruangan', $i->id_blok_ruangan) }}"
+                                            <form action="{{ route('admin.hapus_blok_ruangan', $i->id_blok_ruangan) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -100,7 +100,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('superadmin.simpan_blok_ruangan') }}">
+                    <form method="post" action="{{ route('admin.simpan_blok_ruangan') }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label mt-3">Fasilitas</label>
@@ -149,7 +149,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post" action="{{ route('superadmin.ubah_blok_ruangan') }}">
+                    <form method="post" action="{{ route('admin.ubah_blok_ruangan') }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <input type="hidden" id="id_blok_ruangan" name="id_blok_ruangan">

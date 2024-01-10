@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Instansi;
+use App\Models\Fasilitas;
 use Illuminate\Database\Seeder;
 
-class InstansiTableSeeder extends Seeder
+class FasilitasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,18 +14,18 @@ class InstansiTableSeeder extends Seeder
      */
     public function run()
     {
-        $instansi = [
+        $fasilitas = [
             [
-                'nama_instansi' => 'Bappenda'
+                'nama_fasilitas' => 'Multimedia'
             ],
             [
-                'nama_instansi' => 'DPMPTSP'
+                'nama_fasilitas' => 'Aula'
             ],
             [
-                'nama_instansi' => 'Disdukcapil'
+                'nama_fasilitas' => 'Ruang Rapat'
             ]
         ];
 
-        Instansi::insert($instansi);
+        Fasilitas::insert($fasilitas);
     }
 }

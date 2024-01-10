@@ -13,7 +13,7 @@ class Fasilitas extends Model
 
     protected $primaryKey = 'id_fasilitas';
 
-    protected $fillable = ['nama_fasilitas', 'foto'];
+    protected $fillable = ['nama_fasilitas', 'file', 'nama', 'extension', 'size', 'mime'];
 
     public function blok_ruangan()
     {

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -13,15 +12,39 @@ return [
     |
     */
 
-    'menu' => [[
-		'icon' => 'fa fa-th-large',
-		'title' => 'Beranda',
-		'url' => '/admin/dashboard',
-	],[
-		'icon' => 'fa fa-align-left',
-		'title' => 'Data Permohonan',
-		'url' => '/admin/dataPemohon',
-		'caret' => false,
-		
-	]]
+    'menu' => [
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Beranda',
+            'url' => '/admin/dashboard',
+        ],
+        [
+            'icon' => 'fa fa-file-alt',
+            'title' => 'Data Master',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/fasilitas',
+                    'title' => 'Fasilitas',
+                ],
+                [
+                    'url' => '/admin/instansi',
+                    'title' => 'Instansi',
+                ],
+                [
+                    'url' => '/admin/alat-pendukung',
+                    'title' => 'Alat Pendukung',
+                ],
+                [
+                    'url' => '/admin/blok-ruangan',
+                    'title' => 'Blok Ruangan',
+                ],
+                [
+                    'url' => '/admin/bidang-kegiatan',
+                    'title' => 'Bidang Kegiatan',
+                ],
+            ],
+        ],
+    ],
 ];

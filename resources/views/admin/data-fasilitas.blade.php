@@ -1,4 +1,4 @@
-@extends('layouts.super')
+@extends('layouts.default')
 
 @section('title', 'Data Fasilitas')
 
@@ -17,7 +17,7 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item font-semibold"><a href="{{ route('superadmin.index') }}">Beranda</a></li>
+        <li class="breadcrumb-item font-semibold"><a href="{{ route('admin.index') }}">Beranda</a></li>
         <li class="breadcrumb-item font-normal cursor-default">Data Fasilitas</li>
     </ol>
     <!-- end breadcrumb -->
@@ -78,7 +78,7 @@
                                             <!-- <button class="btn btn-white"><i class="fa fa-search-plus text-black"></i></button> -->
                                             <button class="btn btn-white"><i class="fa fa-edit text-blue"></i></button>
 
-                                            <form action="{{ route('superadmin.hapus_fasilitas', $f->id_fasilitas) }}"
+                                            <form action="{{ route('admin.hapus_fasilitas', $f->id_fasilitas) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -109,7 +109,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body mx-3">
-                    <form action="{{ route('superadmin.simpan_fasilitas') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.simpan_fasilitas') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Fasilitas/Ruangan</label>

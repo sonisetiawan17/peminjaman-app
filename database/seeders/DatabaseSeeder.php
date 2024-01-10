@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InstansiTableSeeder::class);
         $this->call(AlatPendukungTableSeeder::class);
         $this->call(BidangKegiatanTableSeeder::class);
+        $this->call(FasilitasTableSeeder::class);
     }
 }

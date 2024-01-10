@@ -20,8 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 
 // Protected User Routes
-Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.')->group(function () {
-    Route::get('/', [UserDashboardController::class, 'index'])->name('index');
+Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('index');
+    Route::get('/buatPermohonan', [UserDashboardController::class, 'buatPermohonan'])->name('buatPermohonan');
+    Route::post('/simpanPermohonan', [UserDashboardController::class, 'simpanPermohonan'])->name('simpanPermohonan');
+    Route::get('/historiPermohonan', [UserDashboardController::class, 'historiPermohonan'])->name('historiPermohonan');
+    Route::get('/lihatPermohonan/{id_permohonan}', [UserDashboardController::class, 'lihatPermohonan'])->name('lihatPermohonan');
+    Route::delete('/destroy/{id_permohonan}', [UserDashboardController::class, 'destroy'])->name('hapusPermohonan');
 });
 
 // Protected Admin Routes
@@ -29,6 +34,30 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('index');
     Route::get('/dataPemohon', [AdminDashboardController::class, 'dataPemohon'])->name('dataPemohon');
     Route::get('/lihatPemohon/{id_permohonan}', [AdminDashboardController::class, 'show'])->name('show');
+
+    Route::get('/fasilitas', [CRUDController::class, 'index_fasilitas'])->name('index_fasilitas');
+    Route::post('/simpanFasilitas', [CRUDController::class, 'simpan_fasilitas'])->name('simpan_fasilitas');
+    Route::delete('/hapusFasilitas/{id_fasilitas}', [CRUDController::class, 'hapus_fasilitas'])->name('hapus_fasilitas');
+
+    Route::get('/instansi', [CRUDController::class, 'index_instansi'])->name('index_instansi');
+    Route::post('/simpanInstansi', [CRUDController::class, 'simpan_instansi'])->name('simpan_instansi');
+    Route::delete('/hapusInstansi/{id_instansi}', [CRUDController::class, 'hapus_instansi'])->name('hapus_instansi');
+    Route::post('/ubahInstansi', [CRUDController::class, 'ubah_instansi'])->name('ubah_instansi');
+
+    Route::get('/alat-pendukung', [CRUDController::class, 'index_alat'])->name('index_alat');
+    Route::post('/simpanAlatPendukung', [CRUDController::class, 'simpan_alat'])->name('simpan_alat');
+    Route::delete('/hapusAlatPendkukung/{id_alat_pendukung}', [CRUDController::class, 'hapus_alat'])->name('hapus_alat');
+    Route::post('/ubahAlatPendukung', [CRUDController::class, 'ubah_alat'])->name('ubah_alat');
+
+    Route::get('/blok-ruangan', [CRUDController::class, 'index_blok_ruangan'])->name('blok_ruangan');
+    Route::post('/simpanBlokRuangan', [CRUDController::class, 'simpan_blok_ruangan'])->name('simpan_blok_ruangan');
+    Route::delete('/hapusBlokRuangan/{id_blok_ruangan}', [CRUDController::class, 'hapus_blok_ruangan'])->name('hapus_blok_ruangan');
+    Route::post('/ubahBlokRuangan', [CRUDController::class, 'ubah_blok_ruangan'])->name('ubah_blok_ruangan');
+
+    Route::get('/bidang-kegiatan', [CRUDController::class, 'index_bidang_kegiatan'])->name('bidang_kegiatan');
+    Route::post('/simpanBidangKegiatan', [CRUDController::class, 'simpan_bidang_kegiatan'])->name('simpan_bidang');
+    Route::delete('/hapusBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'hapus_bidang_kegiatan'])->name('hapus_bidang');
+    Route::post('/ubahBidangKegiatan', [CRUDController::class, 'ubah_bidang_kegiatan'])->name('ubah_bidang');
 });
 
 // Protected SuperAdmin Routes
@@ -53,17 +82,17 @@ Route::middleware(['auth', 'role:super-admin'])->prefix('superadmin')->name('sup
     Route::get('/alat-pendukung', [CRUDController::class, 'index_alat'])->name('index_alat');
     Route::post('/simpanAlatPendukung', [CRUDController::class, 'simpan_alat'])->name('simpan_alat');
     Route::delete('/hapusAlatPendkukung/{id_alat_pendukung}', [CRUDController::class, 'hapus_alat'])->name('hapus_alat');
-    Route::post('/ubahAlatPendukung/{id_alat_pendukung}', [CRUDController::class, 'ubah_alat'])->name('ubah_alat');
+    Route::post('/ubahAlatPendukung', [CRUDController::class, 'ubah_alat'])->name('ubah_alat');
 
     Route::get('/blok-ruangan', [CRUDController::class, 'index_blok_ruangan'])->name('blok_ruangan');
     Route::post('/simpanBlokRuangan', [CRUDController::class, 'simpan_blok_ruangan'])->name('simpan_blok_ruangan');
     Route::delete('/hapusBlokRuangan/{id_blok_ruangan}', [CRUDController::class, 'hapus_blok_ruangan'])->name('hapus_blok_ruangan');
-    Route::post('/ubahBlokRuangan/{id_blok_ruangan}', [CRUDController::class, 'ubah_blok_ruangan'])->name('ubah_blok_ruangan');
+    Route::post('/ubahBlokRuangan', [CRUDController::class, 'ubah_blok_ruangan'])->name('ubah_blok_ruangan');
 
     Route::get('/bidang-kegiatan', [CRUDController::class, 'index_bidang_kegiatan'])->name('bidang_kegiatan');
     Route::post('/simpanBidangKegiatan', [CRUDController::class, 'simpan_bidang_kegiatan'])->name('simpan_bidang');
     Route::delete('/hapusBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'hapus_bidang_kegiatan'])->name('hapus_bidang');
-    Route::post('/ubahBidangKegiatan/{id_bidang_kegiatan}', [CRUDController::class, 'ubah_bidang_kegiatan'])->name('ubah_bidang');
+    Route::post('/ubahBidangKegiatan', [CRUDController::class, 'ubah_bidang_kegiatan'])->name('ubah_bidang');
 });
 
 require __DIR__.'/auth.php';

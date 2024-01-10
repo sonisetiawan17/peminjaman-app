@@ -1,4 +1,4 @@
-@extends('layouts.super')
+@extends('layouts.default')
 
 @section('title', 'Data Alat Pendukung')
 
@@ -10,17 +10,17 @@
 
 @section('content')
     @php
-        $totalBidang = App\Models\BidangKegiatan::count();
+        $totalAlat = App\Models\AlatPendukung::count();
     @endphp
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item font-semibold"><a href="{{ route('superadmin.index') }}">Beranda</a></li>
-        <li class="breadcrumb-item font-normal cursor-default">Data Bidang Kegiatan</li>
+        <li class="breadcrumb-item font-semibold"><a href="{{ route('admin.index') }}">Beranda</a></li>
+        <li class="breadcrumb-item font-normal cursor-default">Data Alat Pendukung</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Data Bidang Kegiatan <small></small></h1>
+    <h1 class="page-header">Data Alat Pendukung <small></small></h1>
     <!-- end page-header -->
     <!-- begin row -->
     <div class="row">
@@ -30,7 +30,7 @@
             <div class="panel panel-inverse">
                 <!-- begin panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">Bidang Kegiatan</h4>
+                    <h4 class="panel-title">Alat Pendukung</h4>
                     <div class="panel-heading-btn">
                         <a href="#modal-dialog" class="btn btn-sm btn-primary" data-toggle="modal"><i
                                 class="fa fa-plus"></i> Tambah Data</a>
@@ -45,23 +45,24 @@
                         <thead>
                             <tr>
                                 <th width="1%">No</th>
-                                <th class="text-nowrap">Bidang Kegiatan</th>
+                                <th class="text-nowrap">Alat Pendukung</th>
                                 <th class="text-nowrap" width="10%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $no=1; @endphp
-                            @foreach ($bidang as $i)
+                            @foreach ($alat as $i)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $i->nama_bidang }}</td>
+                                    <td>{{ $i->nama_alat }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-id_bidang_kegiatan="{{ $i->id_bidang_kegiatan }}" data-nama_bidang="{{ $i->nama_bidang }}"
-                                                class="btn btn-white"><i class="fa fa-edit text-blue"></i></a>
+                                                data-target="#isimodal" data-id_alat_pendukung="{{ $i->id_alat_pendukung }}"
+                                                data-nama_alat="{{ $i->nama_alat }}" class="btn btn-white"><i
+                                                    class="fa fa-edit text-blue"></i></a>
 
-                                            <form action="{{ route('superadmin.hapus_bidang', $i->id_bidang_kegiatan) }}"
+                                            <form action="{{ route('admin.hapus_alat', $i->id_alat_pendukung) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -92,12 +93,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('superadmin.simpan_bidang') }}">
+                    <form method="post" action="{{ route('admin.simpan_alat') }}">
                         @csrf
                         <div class="form-group row m-b-15">
-                            <label class="col-md-5 col-form-label">Nama Bidang Kegiatan</label>
+                            <label class="col-md-5 col-form-label">Nama Alat Pendukung</label>
                             <div class="col-md-7">
-                                <input required name="nama_bidang" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                                <input required name="nama_alat" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                    placeholder="" />
                             </div>
                         </div>
                 </div>
@@ -117,18 +120,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ubah Data Bidang Kegiatan</h4>
+                    <h4 class="modal-title">Ubah Data Alat Pendukung</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post"
-                        action="{{ route('superadmin.ubah_bidang') }}">
+                    <form method="post" action="{{ route('admin.ubah_alat') }}">
                         @csrf
                         <div class="form-group row m-b-15">
-                            <label class="col-md-5 col-form-label">Nama Bidang</label>
+                            <input type="hidden" id="id_alat_pendukung" name="id_alat_pendukung">
+                            <label class="col-md-5 col-form-label">Nama Alat</label>
                             <div class="col-md-7">
-                                <input type="hidden" id="id_bidang_kegiatan" name="id_bidang_kegiatan">
-                                <input required name="nama_bidang" id="nama_bidang" type="text" class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                                <input required name="nama_alat" id="nama_alat" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
                         </div>
                 </div>
@@ -147,11 +150,11 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).on("click", "#modal_show", function() {
-            var id_bidang_kegiatan = $(this).data('id_bidang_kegiatan');
-            var nama_bidang = $(this).data('nama_bidang');
+            var id_alat_pendukung = $(this).data('id_alat_pendukung');
+            var nama_alat = $(this).data('nama_alat');
 
-            $("#tampil_modal #id_bidang_kegiatan").val(id_bidang_kegiatan);
-            $("#tampil_modal #nama_bidang").val(nama_bidang);
+            $("#tampil_modal #id_alat_pendukung").val(id_alat_pendukung);
+            $("#tampil_modal #nama_alat").val(nama_alat);
 
         })
     </script>

@@ -16,8 +16,8 @@ class CreateBlokRuanganTable extends Migration
         Schema::create('blok_ruangan', function (Blueprint $table) {
             $table->increments('id_blok_ruangan');
             $table->unsignedInteger('fasilitas_id')->nullable();
-            $table->time('tgl_mulai');
-            $table->time('tgl_selesai');
+            $table->date('tgl_mulai');
+            $table->date('tgl_selesai');
             $table->string('keterangan');
             $table->timestamps();
 

@@ -16,8 +16,8 @@
 					</div>
 					<div class="info">
 						<b class="caret pull-right"></b>
-						{{ auth::user()->name }}
-						<small>Front end developer</small>
+						SIPP
+						<small>{{ auth::user()->name }}</small>
 					</div>
 				</a>
 			</li>

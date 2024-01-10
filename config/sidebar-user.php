@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -13,21 +12,27 @@ return [
     |
     */
 
-    'menu' => [[
-		'icon' => 'fa fa-th-large',
-		'title' => 'Beranda',
-		'url' => '/user/dashboard',
-	],[
-		'icon' => 'fa fa-folder',
-		'title' => 'Permohonan',
-		'url' => '#',
-		'caret' => true,
-		'sub_menu' => [[
-			'url' => '/user/buatPermohonan',
-			'title' => 'Buat Permohonan',
-      ],[
-			'url' => '/user/historiPermohonan',
-			'title' => 'Histori Permohonan',
-      ]],
-	]]
+    'menu' => [
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Beranda',
+            'url' => '/user/dashboard',
+        ],
+        [
+            'icon' => 'fa fa-folder',
+            'title' => 'Permohonan',
+            'url' => '#',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/user/buatPermohonan',
+                    'title' => 'Buat Permohonan',
+                ],
+                [
+                    'url' => '/user/historiPermohonan',
+                    'title' => 'Histori Permohonan',
+                ],
+            ],
+        ],
+    ],
 ];

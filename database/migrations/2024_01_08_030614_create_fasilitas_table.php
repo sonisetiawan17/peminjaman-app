@@ -16,7 +16,11 @@ class CreateFasilitasTable extends Migration
         Schema::create('fasilitas', function (Blueprint $table) {
             $table->increments('id_fasilitas');
             $table->string('nama_fasilitas');
-            $table->string('foto');
+            $table->text('file')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('extension')->nullable();
+            $table->integer('size')->nullable();
+            $table->string('mime')->nullable();
             $table->timestamps();
         });
     }

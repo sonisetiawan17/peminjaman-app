@@ -15,8 +15,8 @@
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item"><a href="javascript:;">Beranda</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Data Alat Pendukung</a></li>
+        <li class="breadcrumb-item font-semibold"><a href="{{ route('superadmin.index') }}">Beranda</a></li>
+        <li class="breadcrumb-item font-normal cursor-default">Data Alat Pendukung</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -30,7 +30,7 @@
             <div class="panel panel-inverse">
                 <!-- begin panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">DataTable</h4>
+                    <h4 class="panel-title">Alat Pendukung</h4>
                     <div class="panel-heading-btn">
                         <a href="#modal-dialog" class="btn btn-sm btn-primary" data-toggle="modal"><i
                                 class="fa fa-plus"></i> Tambah Data</a>
@@ -40,14 +40,6 @@
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
                 <div class="panel-body">
-
-                    @if (session('sukses'))
-                        <div class="alert alert-success fade show">
-                            <span class="close" data-dismiss="alert">×</span>
-
-                            {{ session('sukses') }}
-                        </div>
-                    @endif
                     <table id="data-table-select" class="table table-striped table-bordered table-td-valign-middle"
                         width="100%">
                         <thead>
@@ -66,8 +58,9 @@
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
-                                                data-target="#isimodal" data-nama_alat="{{ $i->nama_alat }}"
-                                                class="btn btn-white"><i class="fa fa-edit text-blue"></i></a>
+                                                data-target="#isimodal" data-id_alat_pendukung="{{ $i->id_alat_pendukung }}"
+                                                data-nama_alat="{{ $i->nama_alat }}" class="btn btn-white"><i
+                                                    class="fa fa-edit text-blue"></i></a>
 
                                             <form action="{{ route('superadmin.hapus_alat', $i->id_alat_pendukung) }}"
                                                 method="POST">
@@ -105,13 +98,15 @@
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Alat Pendukung</label>
                             <div class="col-md-7">
-                                <input required name="nama_alat" type="text" class="form-control" placeholder="" />
+                                <input required name="nama_alat" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                    placeholder="" />
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
-                    <button type="submit" class="btn btn-success">Tambah</button>
+                    <a href="javascript:;" class="button-ghost" data-dismiss="modal">Tutup</a>
+                    <button type="submit" class="button-primary">Tambah</button>
                 </div>
                 </form>
             </div>
@@ -129,20 +124,20 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body" id="tampil_modal">
-                    <form method="post"
-                        action="{{ $totalAlat > 0 ? route('superadmin.ubah_alat', $i->id_alat_pendukung) : '' }}">
+                    <form method="post" action="{{ route('superadmin.ubah_alat') }}">
                         @csrf
                         <div class="form-group row m-b-15">
+                            <input type="hidden" id="id_alat_pendukung" name="id_alat_pendukung">
                             <label class="col-md-5 col-form-label">Nama Alat</label>
                             <div class="col-md-7">
-                                <input required name="nama_alat" id="nama_alat" type="text" class="form-control rounded-md"
-                                    placeholder="" value="{{ $totalAlat > 0 ? old('nama_alat', $i->nama_alat) : '' }}" />
+                                <input required name="nama_alat" id="nama_alat" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-primary" data-dismiss="modal">Tutup</a>
-                    <button type="submit" class="btn btn-dark">Ubah Data</button>
+                    <a href="javascript:;" class="button-ghost" data-dismiss="modal">Tutup</a>
+                    <button type="submit" class="button-primary">Ubah Data</button>
                 </div>
                 </form>
             </div>
@@ -155,8 +150,10 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).on("click", "#modal_show", function() {
+            var id_alat_pendukung = $(this).data('id_alat_pendukung');
             var nama_alat = $(this).data('nama_alat');
 
+            $("#tampil_modal #id_alat_pendukung").val(id_alat_pendukung);
             $("#tampil_modal #nama_alat").val(nama_alat);
 
         })

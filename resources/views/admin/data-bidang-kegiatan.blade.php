@@ -1,4 +1,4 @@
-@extends('layouts.super')
+@extends('layouts.default')
 
 @section('title', 'Data Alat Pendukung')
 
@@ -15,7 +15,7 @@
 
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
-        <li class="breadcrumb-item font-semibold"><a href="{{ route('superadmin.index') }}">Beranda</a></li>
+        <li class="breadcrumb-item font-semibold"><a href="{{ route('admin.index') }}">Beranda</a></li>
         <li class="breadcrumb-item font-normal cursor-default">Data Bidang Kegiatan</li>
     </ol>
     <!-- end breadcrumb -->
@@ -61,7 +61,7 @@
                                                 data-target="#isimodal" data-id_bidang_kegiatan="{{ $i->id_bidang_kegiatan }}" data-nama_bidang="{{ $i->nama_bidang }}"
                                                 class="btn btn-white"><i class="fa fa-edit text-blue"></i></a>
 
-                                            <form action="{{ route('superadmin.hapus_bidang', $i->id_bidang_kegiatan) }}"
+                                            <form action="{{ route('admin.hapus_bidang', $i->id_bidang_kegiatan) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -92,7 +92,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('superadmin.simpan_bidang') }}">
+                    <form method="post" action="{{ route('admin.simpan_bidang') }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Bidang Kegiatan</label>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="modal-body" id="tampil_modal">
                     <form method="post"
-                        action="{{ route('superadmin.ubah_bidang') }}">
+                        action="{{ route('admin.ubah_bidang') }}">
                         @csrf
                         <div class="form-group row m-b-15">
                             <label class="col-md-5 col-form-label">Nama Bidang</label>
