@@ -16,4 +16,9 @@ class AlatPendukung extends Model
     protected $fillable = [
         'nama_alat',
     ];
+
+    // public function permohonan()
+    // {
+    //     return $this->hasMany(Permohonan::class, 'alat_pendukung_id');
+    // }
 }

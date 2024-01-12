@@ -82,7 +82,6 @@
             <div>
                 <!-- begin step-1 -->
                 <div id="step-1">
-                    <!-- begin fieldset -->
                     <fieldset>
                         <!-- begin row -->
                         <div class="row">
@@ -94,22 +93,27 @@
                                             <label class="col-lg-4 col-form-label">SKPD/Non SKPD <sup
                                                     class="text-red">*</sup></label>
                                             <div class="col-lg-8">
-                                                <select class="default-select2 form-control" name="skpd">
+                                                <select
+                                                    class="border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md w-full"
+                                                    name="skpd">
                                                     <option disabled selected>-- Pilih Bidang SKPD --</option>
                                                     <option value="skpd">SKPD</option>
                                                     <option value="non_skpd">NON SKPD</option>
                                                 </select>
-                                                <div class="alert alert-muted p-5 mt-1">
+                                                <div class="alert alert-muted px-8 py-2 mt-1">
                                                     <small><b>Catatan :</b><br>
                                                         <b>SKPD</b> (acara pemerintah)<br>
-                                                        <b>NON SKPD</b> (acara diluar pemerintah)</small>
+                                                        <b>NON SKPD</b> (acara diluar pemerintah)
+                                                    </small>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-3">
                                             <label class="col-lg-4 col-form-label">Bidang Kegiatan</label>
                                             <div class="col-lg-8">
-                                                <select class="default-select2 form-control" name="id_bidang_kegiatan">
+                                                <select
+                                                    class="border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md w-full"
+                                                    name="bidang_id">
                                                     <option disabled selected>-- Pilih Bidang Kegiatan --</option>
                                                     @foreach ($bidang as $b)
                                                         <option value="{{ $b->id_bidang_kegiatan }}">{{ $b->nama_bidang }}
@@ -121,28 +125,36 @@
                                         <div class="form-group row mb-3">
                                             <label class="col-lg-4 col-form-label">No KTP</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" name="ktp" />
+                                                <input type="text"
+                                                    class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                    name="nik" value="{{ Auth::user()->nik }}" disabled />
                                             </div>
                                         </div>
                                         <div class="form-group row mb-3">
                                             <label class="col-lg-4 col-form-label">Nama Pemohon</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" value="{{ Auth::user()->id }}"
-                                                    name="id_user" />
-                                                <input type="text" class="form-control" value="{{ Auth::user()->name }}"
-                                                    name="name" />
+                                                <input type="hidden"
+                                                    class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                    value="{{ Auth::user()->id }}" name="user_id" disabled />
+                                                <input type="text"
+                                                    class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                    value="{{ Auth::user()->name }}" name="name" disabled />
                                             </div>
                                         </div>
                                         <div class="form-group row mb-3">
                                             <label class="col-lg-4 col-form-label">No Telepon</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" name="no_telp" />
+                                                <input type="text"
+                                                    class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                    name="no_telp" value="{{ Auth::user()->no_telp }}" disabled />
                                             </div>
                                         </div>
                                         <div class="form-group row mb-3">
                                             <label class="col-lg-4 col-form-label">Alamat Lengkap</label>
                                             <div class="col-lg-8">
-                                                <textarea class="form-control" name="alamat"></textarea>
+                                                <input type="text"
+                                                    class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                    name="alamat" value="{{ Auth::user()->alamat }}" disabled />
                                             </div>
                                         </div>
                                 </div>
@@ -151,11 +163,8 @@
                         </div>
                         <!-- end row -->
                     </fieldset>
-
-                    <!-- end fieldset -->
                 </div>
-                <!-- end step-1 -->
-                <!-- begin step-2 -->
+
                 <div id="step-2">
                     <!-- begin fieldset -->
                     <fieldset>
@@ -165,9 +174,11 @@
                             <div class="col-xl-12">
                                 <div class="panel-body panel-form">
                                     <div class="form-group row mb-3">
-                                        <label class="col-lg-4 col-form-label">Nama Instansi / Pribadi</label>
+                                        <label class="col-lg-4 col-form-label">Bidang Kegiatan</label>
                                         <div class="col-lg-8">
-                                            <select class="default-select2 form-control" name="id_instansi">
+                                            <select
+                                                class="border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md w-full"
+                                                name="instansi_id" id="instansiSelect">
                                                 <option disabled selected>-- Pilih Instansi --</option>
                                                 @foreach ($instansi as $i)
                                                     <option value="{{ $i->id_instansi }}">{{ $i->nama_instansi }}</option>
@@ -178,19 +189,25 @@
                                     <div class="form-group row mb-3">
                                         <label class="col-lg-4 col-form-label">Status dalam instansi / Pribadi</label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" name="status_instansi" />
+                                            <input type="text"
+                                                class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                name="status_instansi" />
                                         </div>
                                     </div>
                                     <div class="form-group row mb-3">
                                         <label class="col-lg-4 col-form-label">Bidang Instansi / Pribadi</label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" name="bidang_instansi" />
+                                            <input type="text"
+                                                class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                name="bidang_instansi" />
                                         </div>
                                     </div>
                                     <div class="form-group row mb-3">
                                         <label class="col-lg-4 col-form-label">Alamat Instansi / Pribadi</label>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" name="alamat_instansi"></textarea>
+                                            <input type="text"
+                                                class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                name="alamat_instansi" id="valAlamat" />
                                         </div>
                                     </div>
                                 </div>
@@ -201,19 +218,18 @@
                     </fieldset>
                     <!-- end fieldset -->
                 </div>
-                <!-- end step-2 -->
-                <!-- begin step-3 -->
+
                 <div id="step-3">
-                    <!-- begin fieldset -->
                     <fieldset>
-                        <!-- begin row -->
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="panel-body panel-form">
                                     <div class="form-group row mb-3">
                                         <label class="col-lg-4 col-form-label">Mulai Tanggal</label>
                                         <div class="col-lg-3">
-                                            <input type="date" class="form-control" name="tgl_mulai" />
+                                            <input type="date"
+                                                class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                name="tgl_mulai" />
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +281,9 @@
                                     <div class="form-group row mb-3">
                                         <label class="col-lg-4 col-form-label">Selesai Tanggal</label>
                                         <div class="col-lg-3">
-                                            <input type="date" class="form-control" name="tgl_selesai" />
+                                            <input type="date"
+                                                class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                                name="tgl_selesai" />
                                         </div>
                                     </div>
                                 </div>
@@ -317,25 +335,33 @@
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-4 col-form-label">Nama Acara / Kegiatan</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="nama_kegiatan" />
+                                        <input type="text"
+                                            class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                            name="nama_kegiatan" />
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-4 col-form-label">Jumlah Peserta</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="jumlah_peserta" />
+                                        <input type="text"
+                                            class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                            name="jumlah_peserta" />
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-4 col-form-label">Narasumber</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="narasumber" />
+                                        <input type="text"
+                                            class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                            name="narasumber" />
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-4 col-form-label">Ringkasan</label>
                                     <div class="col-lg-8">
-                                        <textarea class="form-control" name="ringkasan" /></textarea>
+                                        <textarea
+                                            class="border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md w-full"
+                                            name="ringkasan" /></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
@@ -355,13 +381,17 @@
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-4 col-form-label">Output</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="output" />
+                                        <input type="text"
+                                            class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                            name="output" />
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
                                     <label class="col-lg-4 col-form-label">Outcome</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="outcome" />
+                                        <input type="text"
+                                            class="form-control border-gray-200 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md"
+                                            name="outcome" />
                                     </div>
                                 </div>
 
@@ -371,21 +401,20 @@
                     </fieldset>
                     <!-- end fieldset -->
                 </div>
-                <!-- end step-3 -->
-                <!-- begin step-4 -->
+
                 <div id="step-4">
-                    <!-- begin image -->
                     <h5 class="mb-3">Fasilitas Tersedia </h5>
                     <div class="gallery">
                         <div class="row">
                             @foreach ($fasilitas as $f)
-                                <div class="image gallery-group-1" style="float:left">
+                                <div class="image gallery-group-1 relative" style="float:left">
                                     <div class="image-inner">
                                         <a href="/foto_fasilitas/{{ $f->file }}" data-lightbox="gallery-group-1">
                                             <div class="img"
                                                 style="background-image: url(/foto_fasilitas/{{ $f->file }})"></div>
                                         </a>
-                                        <p class="image-caption">
+                                        <p class="absolute top-0 lef-0 px-4 py-1 text-white"
+                                            style="background-color: rgba(0, 170, 91, 0.5); border-radius: 0 0 8px 0;">
                                             {{ $f->nama_fasilitas }}
                                         </p>
                                     </div>
@@ -402,13 +431,13 @@
                         </div>
                         <!-- end image -->
                         <hr>
-                        <h5>Alat Pendukung Kegiatan </h5>
+                        <h5 class="mt-5">Alat Pendukung Kegiatan </h5>
                         <div class="alert alert-light">
                             <div class="row">
                                 @foreach ($alat as $a)
                                     <div class="btn-group mr-3">
                                         <div class="checkbox">
-                                            <input name="id_alat[]" type="checkbox" value="{{ $a->id_alat }}"
+                                            <input name="id_alat[]" type="checkbox" value="{{ $a->id_alat_pendukung }}"
                                                 id="{{ $a->id_alat }}">
                                             <label class="text-dark">{{ $a->nama_alat }}</label>
                                         </div>
@@ -419,8 +448,7 @@
 
                     </div>
                 </div>
-                <!-- end step-4 -->
-                <!-- step 5 -->
+
                 <div id="step-5">
 
                     <div class="jumbotron m-b-0 text-center">
@@ -432,7 +460,6 @@
                         <p><button type="submit" class="btn btn-primary btn-lg">Kirim Permohonan</button></p>
                     </div>
                 </div>
-                <!-- end step 5 -->
             </div>
             <!-- end wizard-content -->
         </div>
@@ -448,4 +475,33 @@
     <script src="/assets/plugins/isotope-layout/dist/isotope.pkgd.min.js"></script>
     <script src="/assets/plugins/lightbox2/dist/js/lightbox.min.js"></script>
     <script src="/assets/js/demo/gallery.demo.js"></script>
+
+    <script>
+        // Menangani perubahan pada elemen select
+        document.getElementById('instansiSelect').addEventListener('change', function() {
+            // Mengambil nilai dari elemen select
+            var selectedValue = this.value;
+
+            // Menentukan nilai yang akan diisi pada field input
+            var inputValue = '';
+
+            // Memeriksa nilai yang dipilih dan menetapkan nilai input sesuai
+            switch (selectedValue) {
+                case '1':
+                    inputValue = 'Cimahi Utara';
+                    break;
+                case '2':
+                    inputValue = 'Cimahi Tengah';
+                    break;
+                case '3':
+                    inputValue = 'Cimahi Selatan';
+                    break;
+                default:
+                    inputValue = '';
+            }
+
+            // Mengisi nilai pada field input
+            document.getElementById('valAlamat').value = inputValue;
+        });
+    </script>
 @endpush

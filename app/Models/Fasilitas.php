@@ -19,4 +19,9 @@ class Fasilitas extends Model
     {
         return $this->hasMany(BlokRuangan::class, 'fasilitas_id');
     }
+
+    // public function permohonan()
+    // {
+    //     return $this->hasMany(Permohonan::class, 'fasiltias_id');
+    // }
 }

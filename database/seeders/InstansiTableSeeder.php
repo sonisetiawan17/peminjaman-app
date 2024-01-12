@@ -16,13 +16,16 @@ class InstansiTableSeeder extends Seeder
     {
         $instansi = [
             [
-                'nama_instansi' => 'Bappenda'
+                'nama_instansi' => 'Bappenda',
+                'alamat_instansi' => 'Cimahi'
             ],
             [
-                'nama_instansi' => 'DPMPTSP'
+                'nama_instansi' => 'DPMPTSP',
+                'alamat_instansi' => 'Cimahi'
             ],
             [
-                'nama_instansi' => 'Disdukcapil'
+                'nama_instansi' => 'Disdukcapil',
+                'alamat_instansi' => 'Cimahi'
             ]
         ];
 

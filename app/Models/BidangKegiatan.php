@@ -14,4 +14,9 @@ class BidangKegiatan extends Model
     protected $primaryKey = 'id_bidang_kegiatan';
 
     protected $fillable = ['nama_bidang'];
+
+    public function permohonan()
+    {
+        return $this->hasMany(Permohonan::class, 'bidang_id');
+    }
 }

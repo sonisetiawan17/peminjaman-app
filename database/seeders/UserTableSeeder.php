@@ -31,5 +31,17 @@ class UserTableSeeder extends Seeder
         ]);
 
         $admin->assignRole('admin');
+
+        $user = User::create([
+            'name' => 'Soni Setiawan',
+            'email' => 'sonisetiawan059@gmail.com',
+            'password' => bcrypt('rahasiabanget'),
+            'nik' => '3273070747000001',
+            'no_telp' => '085219881523',
+            'alamat' => 'Bandung, Jawa Barat',
+            'nama_organisasi' => 'Dicoding'
+        ]);
+
+        $user->assignRole('user');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInstansiTable extends Migration
+class CreateJadwalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateInstansiTable extends Migration
      */
     public function up()
     {
-        Schema::create('instansi', function (Blueprint $table) {
-            $table->increments('id_instansi');
-            $table->string('nama_instansi');
-            $table->string('alamat_instansi');
+        Schema::create('jadwal', function (Blueprint $table) {
+            $table->increments('id_jadwal');
+            $table->date('tgl_jadwal_mulai');
+            $table->time('jam_mulai');
+            $table->date('tgl_jadwal_selesai');
+            $table->time('jam_selesai');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateInstansiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instansi');
+        Schema::dropIfExists('jadwal');
     }
 }

@@ -43,6 +43,7 @@
                             <tr>
                                 <th width="1%">No</th>
                                 <th class="text-nowrap">Nama Instansi</th>
+                                <th class="text-nowrap">Alamat Instansi</th>
                                 <th class="text-nowrap" width="10%">Aksi</th>
                             </tr>
                         </thead>
@@ -52,11 +53,12 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $i->nama_instansi }}</td>
+                                    <td>{{ $i->alamat_instansi }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a id="modal_show" href="#" type="button" data-toggle="modal"
                                                 data-target="#isimodal" data-id_instansi="{{ $i->id_instansi }}"
-                                                data-nama_instansi="{{ $i->nama_instansi }}" class="btn btn-white"><i
+                                                data-nama_instansi="{{ $i->nama_instansi }}" data-alamat_instansi="{{ $i->alamat_instansi }}" class="btn btn-white"><i
                                                     class="fa fa-edit text-blue"></i></a>
 
                                             <form action="{{ route('superadmin.hapus_instansi', $i->id_instansi) }}"
@@ -98,6 +100,11 @@
                                 <input required name="nama_instansi" type="text"
                                     class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
+                            <label class="col-md-5 col-form-label mt-3">Alamat Instansi</label>
+                            <div class="col-md-7 mt-3">
+                                <input required name="alamat_instansi" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -129,6 +136,12 @@
                                 <input required name="nama_instansi" id="nama_instansi" type="text"
                                     class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
                             </div>
+
+                            <label class="col-md-5 col-form-label mt-3">Alamat Instansi</label>
+                            <div class="col-md-7 mt-3">
+                                <input required id="alamat_instansi" name="alamat_instansi" type="text"
+                                    class="form-control border-gray-300 border-2 focus:border-primary focus:ring-primary focus:ring-opacity-50 rounded-md" />
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -148,9 +161,11 @@
         $(document).on("click", "#modal_show", function() {
             var id_instansi = $(this).data('id_instansi');
             var nama_instansi = $(this).data('nama_instansi');
+            var alamat_instansi = $(this).data('alamat_instansi');
 
             $("#tampil_modal #id_instansi").val(id_instansi);
             $("#tampil_modal #nama_instansi").val(nama_instansi);
+            $("#tampil_modal #alamat_instansi").val(alamat_instansi);
 
         })
     </script>

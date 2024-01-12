@@ -135,7 +135,7 @@ class CRUDController extends Controller
         $data = new Instansi();
         $user = auth::user()->name;
         $data->nama_instansi = $request->nama_instansi;
-        // $data->alamat_instansi = $request->alamat_instansi;
+        $data->alamat_instansi = $request->alamat_instansi;
         $data->save();
 
         if ($user == 'Admin') {
@@ -164,6 +164,7 @@ class CRUDController extends Controller
         $user = auth::user()->name;
         $data = Instansi::find($id_instansi);
         $data->nama_instansi = $request->nama_instansi;
+        $data->alamat_instansi = $request->alamat_instansi;
         $simpan = $data->update();
 
         if ($user == 'Admin') {

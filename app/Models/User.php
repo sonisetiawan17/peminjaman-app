@@ -55,4 +55,9 @@ class User extends Authenticatable
         // return $this->hasOne('App\Models\Instansi', 'id', 'instansi_id');
         return $this->belongsTo(Instansi::class, 'instansi_id');
     }
+
+    public function permohonan()
+    {
+        return $this->hasMany(Permohonan::class);
+    }
 }
