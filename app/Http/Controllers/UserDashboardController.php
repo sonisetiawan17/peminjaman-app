@@ -92,7 +92,6 @@ class UserDashboardController extends Controller
                 $data->id_alat = $id_alat;
                 // $data->status_permohonan = 'Menunggu';
                 $data->save();
-                dd($data);
 
                 $jadwal = new Jadwal();
                 $jadwal->user_id = $request->user_id;
@@ -101,6 +100,8 @@ class UserDashboardController extends Controller
                 $jadwal->tgl_selesai = $request->tgl_selesai;
                 $jadwal->jam_selesai = $request->jam_selesai;
                 $jadwal->save();
+
+                dd($data);
 
                 //  return $data;
                 return redirect()

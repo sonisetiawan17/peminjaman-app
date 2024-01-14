@@ -11,7 +11,6 @@ function checkAndChangeButtonColor(userEmail, userPassword) {
     const isPasswordValid = userPassword.length > 6;
 
     if (isEmailValid && isPasswordValid) {
-        button.removeAttribute("disabled");
         button.style.backgroundColor = "#5465ff";
         button.style.color = "white";
         button.style.cursor = "pointer";

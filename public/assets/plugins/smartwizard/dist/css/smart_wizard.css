@@ -16,7 +16,7 @@
     display: block;
     margin: 0;
     padding: 0;
-    border-radius: .25rem!important;
+    border-radius: 0.25rem !important;
 }
 
 .sw-main .sw-container {
@@ -48,8 +48,8 @@
 
 .sw-theme-default .step-content {
     padding: 10px;
-    border: 0px solid #D4D4D4;
-    background-color: #FFF;
+    border: 0px solid #d4d4d4;
+    background-color: #fff;
     text-align: left;
 }
 
@@ -75,7 +75,8 @@
     margin-right: 2px;
 }
 
-.sw-theme-default > ul.step-anchor > li > a, .sw-theme-default > ul.step-anchor > li > a:hover {
+.sw-theme-default > ul.step-anchor > li > a,
+.sw-theme-default > ul.step-anchor > li > a:hover {
     border: none !important;
     color: #bbb;
     text-decoration: none;
@@ -86,14 +87,14 @@
 }
 
 .sw-theme-default > ul.step-anchor > li.clickable > a:hover {
-    color: #4285F4 !important;
+    color: #4285f4 !important;
     background: transparent !important;
     cursor: pointer;
 }
 
 .sw-theme-default > ul.step-anchor > li > a::after {
     content: "";
-    background: #4285F4;
+    background: #4285f4;
     height: 2px;
     position: absolute;
     width: 100%;
@@ -108,7 +109,7 @@
 
 .sw-theme-default > ul.step-anchor > li.active > a {
     border: none !important;
-    color: #4285F4 !important;
+    color: #4285f4 !important;
     background: transparent !important;
     cursor: pointer;
 }
@@ -148,7 +149,8 @@
     transform: scale(1);
 }
 
-.sw-theme-default > ul.step-anchor > li.disabled > a, .sw-theme-default > ul.step-anchor > li.disabled > a:hover {
+.sw-theme-default > ul.step-anchor > li.disabled > a,
+.sw-theme-default > ul.step-anchor > li.disabled > a:hover {
     color: #eee !important;
     cursor: not-allowed;
 }
@@ -170,14 +172,14 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(255,255,255,.7);
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
+    background: rgba(255, 255, 255, 0.7);
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
     z-index: 2;
 }
 
 .sw-loading::before {
-    content: '';
+    content: "";
     display: inline-block;
     position: absolute;
     top: 50%;
@@ -191,7 +193,7 @@
     margin-top: -40px;
     margin-left: -40px;
     -webkit-animation: spin 1s linear infinite;
- /* Safari */
+    /* Safari */
     animation: spin 1s linear infinite;
 }
 

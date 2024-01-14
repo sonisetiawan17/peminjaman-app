@@ -10,7 +10,7 @@
  * https://github.com/techlab/SmartWizard/blob/master/LICENSE
  */
 
-;(function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
     "use strict";
     // Default options
 
@@ -22,16 +22,17 @@
         backButtonSupport: true, // Enable the back button support
         useURLhash: true, // Enable selection of the step based on url hash
         showStepURLhash: true, // Show url hash based on step
-        lang: { // Language variables for button
-            next: 'Next',
-            previous: 'Previous'
+        lang: {
+            // Language variables for button
+            next: "Selanjutnya",
+            previous: "Kembali",
         },
         toolbarSettings: {
-            toolbarPosition: 'bottom', // none, top, bottom, both
-            toolbarButtonPosition: 'end', // start, end
+            toolbarPosition: "bottom", // none, top, bottom, both
+            toolbarButtonPosition: "end", // start, end
             showNextButton: true, // show/hide a Next button
             showPreviousButton: true, // show/hide a Previous button
-            toolbarExtraButtons: [] // Extra buttons to show on toolbar, array of jQuery input/buttons elements
+            toolbarExtraButtons: [], // Extra buttons to show on toolbar, array of jQuery input/buttons elements
         },
         anchorSettings: {
             anchorClickable: true, // Enable/Disable anchor navigation
@@ -39,7 +40,7 @@
             markDoneStep: true, // Add done css
             markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
             removeDoneStepOnNavigateBack: false, // While navigate back done step after active step will be cleared
-            enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+            enableAnchorOnDoneStep: true, // Enable/Disable the done steps navigation
         },
         contentURL: null, // content url, Enables Ajax content loading. Can also set as data data-content-url on anchor
         contentCache: true, // cache step contents, if false content is fetched always from ajax url
@@ -47,9 +48,9 @@
         disabledSteps: [], // Array Steps disabled
         errorSteps: [], // Highlight step with errors
         hiddenSteps: [], // Hidden steps
-        theme: 'default', // theme for the wizard, related css need to include for other than default theme
-        transitionEffect: 'none', // Effect on navigation, none/slide/fade
-        transitionSpeed: '400'
+        theme: "default", // theme for the wizard, related css need to include for other than default theme
+        transitionEffect: "none", // Effect on navigation, none/slide/fade
+        transitionSpeed: "400",
     };
 
     // The plugin constructor
@@ -59,29 +60,37 @@
         // Main container element
         this.main = $(element);
         // Navigation bar element
-        this.nav = this.main.children('ul');
+        this.nav = this.main.children("ul");
         // Step anchor elements
         this.steps = $("li > a", this.nav);
         // Content container
-        this.container = this.main.children('div');
+        this.container = this.main.children("div");
         // Content pages
-        this.pages = this.container.children('div');
+        this.pages = this.container.children("div");
         // Active step index
         this.current_index = null;
 
         // Backward compatibility
-        this.options.toolbarSettings.toolbarButtonPosition = this.options.toolbarSettings.toolbarButtonPosition === 'right' ? 'end' : this.options.toolbarSettings.toolbarButtonPosition;
-        this.options.toolbarSettings.toolbarButtonPosition = this.options.toolbarSettings.toolbarButtonPosition === 'left' ? 'start' : this.options.toolbarSettings.toolbarButtonPosition;
+        this.options.toolbarSettings.toolbarButtonPosition =
+            this.options.toolbarSettings.toolbarButtonPosition === "right"
+                ? "end"
+                : this.options.toolbarSettings.toolbarButtonPosition;
+        this.options.toolbarSettings.toolbarButtonPosition =
+            this.options.toolbarSettings.toolbarButtonPosition === "left"
+                ? "start"
+                : this.options.toolbarSettings.toolbarButtonPosition;
 
         // Default fix
-        this.options.theme = this.options.theme === null || this.options.theme === '' ? 'default' : this.options.theme;
+        this.options.theme =
+            this.options.theme === null || this.options.theme === ""
+                ? "default"
+                : this.options.theme;
 
         // Call initial method
         this.init();
     }
 
     $.extend(SmartWizard.prototype, {
-
         init: function () {
             // Set the elements
             this._setElements();
@@ -104,9 +113,13 @@
                 }
             }
 
-            if (idx > 0 && this.options.anchorSettings.markDoneStep && this.options.anchorSettings.markAllPreviousStepsAsDone) {
+            if (
+                idx > 0 &&
+                this.options.anchorSettings.markDoneStep &&
+                this.options.anchorSettings.markAllPreviousStepsAsDone
+            ) {
                 // Mark previous steps of the active step as done
-                this.steps.eq(idx).parent('li').prevAll().addClass("done");
+                this.steps.eq(idx).parent("li").prevAll().addClass("done");
             }
 
             // Show the initial step
@@ -117,36 +130,50 @@
 
         _setElements: function () {
             // Set the main element
-            this.main.addClass('sw-main sw-theme-' + this.options.theme);
+            this.main.addClass("sw-main sw-theme-" + this.options.theme);
             // Set anchor elements
-            this.nav.addClass('nav nav-tabs step-anchor').children('li').addClass('nav-item').children('a').addClass('nav-link'); // nav-justified  nav-pills
+            this.nav
+                .addClass("nav nav-tabs step-anchor")
+                .children("li")
+                .addClass("nav-item")
+                .children("a")
+                .addClass("nav-link"); // nav-justified  nav-pills
 
             // Make the anchor clickable
-            if (this.options.anchorSettings.enableAllAnchors !== false && this.options.anchorSettings.anchorClickable !== false) {
-                this.steps.parent('li').addClass('clickable');
+            if (
+                this.options.anchorSettings.enableAllAnchors !== false &&
+                this.options.anchorSettings.anchorClickable !== false
+            ) {
+                this.steps.parent("li").addClass("clickable");
             }
             // Set content container
-            this.container.addClass('sw-container tab-content');
+            this.container.addClass("sw-container tab-content");
             // Set content pages
-            this.pages.addClass('tab-pane step-content');
+            this.pages.addClass("tab-pane step-content");
 
             // Disabled steps
             var mi = this;
-            if (this.options.disabledSteps && this.options.disabledSteps.length > 0) {
+            if (
+                this.options.disabledSteps &&
+                this.options.disabledSteps.length > 0
+            ) {
                 $.each(this.options.disabledSteps, function (i, n) {
-                    mi.steps.eq(n).parent('li').addClass('disabled');
+                    mi.steps.eq(n).parent("li").addClass("disabled");
                 });
             }
             // Error steps
             if (this.options.errorSteps && this.options.errorSteps.length > 0) {
                 $.each(this.options.errorSteps, function (i, n) {
-                    mi.steps.eq(n).parent('li').addClass('danger');
+                    mi.steps.eq(n).parent("li").addClass("danger");
                 });
             }
             // Hidden steps
-            if (this.options.hiddenSteps && this.options.hiddenSteps.length > 0) {
+            if (
+                this.options.hiddenSteps &&
+                this.options.hiddenSteps.length > 0
+            ) {
                 $.each(this.options.hiddenSteps, function (i, n) {
-                    mi.steps.eq(n).parent('li').addClass('hidden');
+                    mi.steps.eq(n).parent("li").addClass("hidden");
                 });
             }
 
@@ -154,63 +181,110 @@
         },
         _setToolbar: function () {
             // Skip right away if the toolbar is not enabled
-            if (this.options.toolbarSettings.toolbarPosition === 'none') {
+            if (this.options.toolbarSettings.toolbarPosition === "none") {
                 return true;
             }
 
             // Create the toolbar buttons
-            var btnNext = this.options.toolbarSettings.showNextButton !== false ? $('<button></button>').text(this.options.lang.next).addClass('btn btn-secondary sw-btn-next').attr('type', 'button') : null;
-            var btnPrevious = this.options.toolbarSettings.showPreviousButton !== false ? $('<button></button>').text(this.options.lang.previous).addClass('btn btn-secondary sw-btn-prev').attr('type', 'button') : null;
-            var btnGroup = $('<div></div>').addClass('btn-group mr-2 sw-btn-group').attr('role', 'group').append(btnPrevious, btnNext);
+            var btnNext =
+                this.options.toolbarSettings.showNextButton !== false
+                    ? $("<button></button>")
+                          .text(this.options.lang.next)
+                          .addClass("btn btn-secondary sw-btn-next")
+                          .attr("type", "button")
+                    : null;
+            var btnPrevious =
+                this.options.toolbarSettings.showPreviousButton !== false
+                    ? $("<button></button>")
+                          .text(this.options.lang.previous)
+                          .addClass("btn btn-secondary sw-btn-prev")
+                          .attr("type", "button")
+                    : null;
+            var btnGroup = $("<div></div>")
+                .addClass("btn-group mr-2 sw-btn-group")
+                .attr("role", "group")
+                .append(btnPrevious, btnNext);
 
             // Add extra toolbar buttons
             var btnGroupExtra = null;
 
-            if (this.options.toolbarSettings.toolbarExtraButtons && this.options.toolbarSettings.toolbarExtraButtons.length > 0) {
-                btnGroupExtra = $('<div></div>').addClass('btn-group mr-2 sw-btn-group-extra').attr('role', 'group');
-                $.each(this.options.toolbarSettings.toolbarExtraButtons, function (i, n) {
-                    btnGroupExtra.append(n.clone(true));
-                });
+            if (
+                this.options.toolbarSettings.toolbarExtraButtons &&
+                this.options.toolbarSettings.toolbarExtraButtons.length > 0
+            ) {
+                btnGroupExtra = $("<div></div>")
+                    .addClass("btn-group mr-2 sw-btn-group-extra")
+                    .attr("role", "group");
+                $.each(
+                    this.options.toolbarSettings.toolbarExtraButtons,
+                    function (i, n) {
+                        btnGroupExtra.append(n.clone(true));
+                    }
+                );
             }
 
             var toolbarTop, toolbarBottom;
             // Append toolbar based on the position
             switch (this.options.toolbarSettings.toolbarPosition) {
-                case 'top':
-                    toolbarTop = $('<div></div>').addClass('btn-toolbar sw-toolbar sw-toolbar-top justify-content-' + this.options.toolbarSettings.toolbarButtonPosition);
+                case "top":
+                    toolbarTop = $("<div></div>").addClass(
+                        "btn-toolbar sw-toolbar sw-toolbar-top justify-content-" +
+                            this.options.toolbarSettings.toolbarButtonPosition
+                    );
                     toolbarTop.append(btnGroup);
-                    if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
+                    if (
+                        this.options.toolbarSettings.toolbarButtonPosition ===
+                        "start"
+                    ) {
                         toolbarTop.prepend(btnGroupExtra);
                     } else {
                         toolbarTop.append(btnGroupExtra);
                     }
                     this.container.before(toolbarTop);
                     break;
-                case 'bottom':
-                    toolbarBottom = $('<div></div>').addClass('btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-' + this.options.toolbarSettings.toolbarButtonPosition);
+                case "bottom":
+                    toolbarBottom = $("<div></div>").addClass(
+                        "btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-" +
+                            this.options.toolbarSettings.toolbarButtonPosition
+                    );
                     toolbarBottom.append(btnGroup);
-                    if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
+                    if (
+                        this.options.toolbarSettings.toolbarButtonPosition ===
+                        "start"
+                    ) {
                         toolbarBottom.prepend(btnGroupExtra);
                     } else {
                         toolbarBottom.append(btnGroupExtra);
                     }
                     this.container.after(toolbarBottom);
                     break;
-                case 'both':
-                    toolbarTop = $('<div></div>').addClass('btn-toolbar sw-toolbar sw-toolbar-top justify-content-' + this.options.toolbarSettings.toolbarButtonPosition);
+                case "both":
+                    toolbarTop = $("<div></div>").addClass(
+                        "btn-toolbar sw-toolbar sw-toolbar-top justify-content-" +
+                            this.options.toolbarSettings.toolbarButtonPosition
+                    );
                     toolbarTop.append(btnGroup);
-                    if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
+                    if (
+                        this.options.toolbarSettings.toolbarButtonPosition ===
+                        "start"
+                    ) {
                         toolbarTop.prepend(btnGroupExtra);
                     } else {
                         toolbarTop.append(btnGroupExtra);
                     }
                     this.container.before(toolbarTop);
 
-                    toolbarBottom = $('<div></div>').addClass('btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-' + this.options.toolbarSettings.toolbarButtonPosition);
+                    toolbarBottom = $("<div></div>").addClass(
+                        "btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-" +
+                            this.options.toolbarSettings.toolbarButtonPosition
+                    );
                     toolbarBottom.append(btnGroup.clone(true));
 
                     if (btnGroupExtra !== null) {
-                        if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
+                        if (
+                            this.options.toolbarSettings
+                                .toolbarButtonPosition === "start"
+                        ) {
                             toolbarBottom.prepend(btnGroupExtra.clone(true));
                         } else {
                             toolbarBottom.append(btnGroupExtra.clone(true));
@@ -219,9 +293,15 @@
                     this.container.after(toolbarBottom);
                     break;
                 default:
-                    toolbarBottom = $('<div></div>').addClass('btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-' + this.options.toolbarSettings.toolbarButtonPosition);
+                    toolbarBottom = $("<div></div>").addClass(
+                        "btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-" +
+                            this.options.toolbarSettings.toolbarButtonPosition
+                    );
                     toolbarBottom.append(btnGroup);
-                    if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
+                    if (
+                        this.options.toolbarSettings.toolbarButtonPosition ===
+                        "start"
+                    ) {
                         toolbarBottom.append(btnGroupExtra);
                     } else {
                         toolbarBottom.append(btnGroupExtra);
@@ -240,15 +320,22 @@
                     return true;
                 }
                 var idx = mi.steps.index(this);
-                if (mi.options.anchorSettings.enableAnchorOnDoneStep === false && mi.steps.eq(idx).parent('li').hasClass('done')) {
+                if (
+                    mi.options.anchorSettings.enableAnchorOnDoneStep ===
+                        false &&
+                    mi.steps.eq(idx).parent("li").hasClass("done")
+                ) {
                     return true;
                 }
 
                 if (idx !== mi.current_index) {
-                    if (mi.options.anchorSettings.enableAllAnchors !== false && mi.options.anchorSettings.anchorClickable !== false) {
+                    if (
+                        mi.options.anchorSettings.enableAllAnchors !== false &&
+                        mi.options.anchorSettings.anchorClickable !== false
+                    ) {
                         mi._showStep(idx);
                     } else {
-                        if (mi.steps.eq(idx).parent('li').hasClass('done')) {
+                        if (mi.steps.eq(idx).parent("li").hasClass("done")) {
                             mi._showStep(idx);
                         }
                     }
@@ -256,13 +343,13 @@
             });
 
             // Next button event
-            $('.sw-btn-next', this.main).on("click", function (e) {
+            $(".sw-btn-next", this.main).on("click", function (e) {
                 e.preventDefault();
                 mi._showNext();
             });
 
             // Previous button event
-            $('.sw-btn-prev', this.main).on("click", function (e) {
+            $(".sw-btn-prev", this.main).on("click", function (e) {
                 e.preventDefault();
                 mi._showPrevious();
             });
@@ -276,12 +363,15 @@
 
             // Back/forward browser button event
             if (this.options.backButtonSupport) {
-                $(window).on('hashchange', function (e) {
+                $(window).on("hashchange", function (e) {
                     if (!mi.options.useURLhash) {
                         return true;
                     }
                     if (window.location.hash) {
-                        var elm = $("a[href*='" + window.location.hash + "']", mi.nav);
+                        var elm = $(
+                            "a[href*='" + window.location.hash + "']",
+                            mi.nav
+                        );
                         if (elm && elm.length > 0) {
                             e.preventDefault();
                             mi._showStep(mi.steps.index(elm));
@@ -296,7 +386,10 @@
             var si = this.current_index + 1;
             // Find the next not disabled step
             for (var i = si; i < this.steps.length; i++) {
-                if (!this.steps.eq(i).parent('li').hasClass('disabled') && !this.steps.eq(i).parent('li').hasClass('hidden')) {
+                if (
+                    !this.steps.eq(i).parent("li").hasClass("disabled") &&
+                    !this.steps.eq(i).parent("li").hasClass("hidden")
+                ) {
                     si = i;
                     break;
                 }
@@ -315,7 +408,10 @@
             var si = this.current_index - 1;
             // Find the previous not disabled step
             for (var i = si; i >= 0; i--) {
-                if (!this.steps.eq(i).parent('li').hasClass('disabled') && !this.steps.eq(i).parent('li').hasClass('hidden')) {
+                if (
+                    !this.steps.eq(i).parent("li").hasClass("disabled") &&
+                    !this.steps.eq(i).parent("li").hasClass("hidden")
+                ) {
                     si = i;
                     break;
                 }
@@ -339,7 +435,10 @@
                 return false;
             }
             // If it is a disabled step, skip
-            if (this.steps.eq(idx).parent('li').hasClass('disabled') || this.steps.eq(idx).parent('li').hasClass('hidden')) {
+            if (
+                this.steps.eq(idx).parent("li").hasClass("disabled") ||
+                this.steps.eq(idx).parent("li").hasClass("hidden")
+            ) {
                 return false;
             }
             // Load step content
@@ -351,44 +450,65 @@
             // Get current step elements
             var curTab = this.steps.eq(this.current_index);
             // Get the direction of step navigation
-            var stepDirection = '';
+            var stepDirection = "";
             var elm = this.steps.eq(idx);
-            var contentURL = elm.data('content-url') && elm.data('content-url').length > 0 ? elm.data('content-url') : this.options.contentURL;
+            var contentURL =
+                elm.data("content-url") && elm.data("content-url").length > 0
+                    ? elm.data("content-url")
+                    : this.options.contentURL;
 
             if (this.current_index !== null && this.current_index !== idx) {
-                stepDirection = this.current_index < idx ? "forward" : "backward";
+                stepDirection =
+                    this.current_index < idx ? "forward" : "backward";
             }
 
             // Trigger "leaveStep" event
-            if (this.current_index !== null && this._triggerEvent("leaveStep", [curTab, this.current_index, stepDirection]) === false) {
+            if (
+                this.current_index !== null &&
+                this._triggerEvent("leaveStep", [
+                    curTab,
+                    this.current_index,
+                    stepDirection,
+                ]) === false
+            ) {
                 return false;
             }
 
-            if (contentURL && contentURL.length > 0 && (!elm.data('has-content') || !this.options.contentCache)) {
+            if (
+                contentURL &&
+                contentURL.length > 0 &&
+                (!elm.data("has-content") || !this.options.contentCache)
+            ) {
                 // Get ajax content and then show step
-                var selPage = elm.length > 0 ? $(elm.attr("href"), this.main) : null;
+                var selPage =
+                    elm.length > 0 ? $(elm.attr("href"), this.main) : null;
 
-                var ajaxSettings = $.extend(true, {}, {
-                    url: contentURL,
-                    type: "POST",
-                    data: { step_number: idx },
-                    dataType: "text",
-                    beforeSend: function () {
-                        mi._loader('show');
+                var ajaxSettings = $.extend(
+                    true,
+                    {},
+                    {
+                        url: contentURL,
+                        type: "POST",
+                        data: { step_number: idx },
+                        dataType: "text",
+                        beforeSend: function () {
+                            mi._loader("show");
+                        },
+                        error: function (jqXHR, status, message) {
+                            mi._loader("hide");
+                            $.error(message);
+                        },
+                        success: function (res) {
+                            if (res && res.length > 0) {
+                                elm.data("has-content", true);
+                                selPage.html(res);
+                            }
+                            mi._loader("hide");
+                            mi._transitPage(idx);
+                        },
                     },
-                    error: function (jqXHR, status, message) {
-                        mi._loader('hide');
-                        $.error(message);
-                    },
-                    success: function (res) {
-                        if (res && res.length > 0) {
-                            elm.data('has-content', true);
-                            selPage.html(res);
-                        }
-                        mi._loader('hide');
-                        mi._transitPage(idx);
-                    }
-                }, this.options.ajaxSettings);
+                    this.options.ajaxSettings
+                );
 
                 $.ajax(ajaxSettings);
             } else {
@@ -401,46 +521,72 @@
             var mi = this;
             // Get current step elements
             var curTab = this.steps.eq(this.current_index);
-            var curPage = curTab.length > 0 ? $(curTab.attr("href"), this.main) : null;
+            var curPage =
+                curTab.length > 0 ? $(curTab.attr("href"), this.main) : null;
             // Get step to show elements
             var selTab = this.steps.eq(idx);
-            var selPage = selTab.length > 0 ? $(selTab.attr("href"), this.main) : null;
+            var selPage =
+                selTab.length > 0 ? $(selTab.attr("href"), this.main) : null;
             // Get the direction of step navigation
-            var stepDirection = '';
+            var stepDirection = "";
             if (this.current_index !== null && this.current_index !== idx) {
-                stepDirection = this.current_index < idx ? "forward" : "backward";
+                stepDirection =
+                    this.current_index < idx ? "forward" : "backward";
             }
 
-            var stepPosition = 'middle';
+            var stepPosition = "middle";
             if (idx === 0) {
-                stepPosition = 'first';
+                stepPosition = "first";
             } else if (idx === this.steps.length - 1) {
-                stepPosition = 'final';
+                stepPosition = "final";
             }
 
-            this.options.transitionEffect = this.options.transitionEffect.toLowerCase();
+            this.options.transitionEffect =
+                this.options.transitionEffect.toLowerCase();
             this.pages.finish();
-            if (this.options.transitionEffect === 'slide') {
+            if (this.options.transitionEffect === "slide") {
                 // normal slide
                 if (curPage && curPage.length > 0) {
-                    curPage.slideUp('fast', this.options.transitionEasing, function () {
-                        selPage.slideDown(mi.options.transitionSpeed, mi.options.transitionEasing);
-                    });
+                    curPage.slideUp(
+                        "fast",
+                        this.options.transitionEasing,
+                        function () {
+                            selPage.slideDown(
+                                mi.options.transitionSpeed,
+                                mi.options.transitionEasing
+                            );
+                        }
+                    );
                 } else {
-                    selPage.slideDown(this.options.transitionSpeed, this.options.transitionEasing);
+                    selPage.slideDown(
+                        this.options.transitionSpeed,
+                        this.options.transitionEasing
+                    );
                 }
-            } else if (this.options.transitionEffect === 'fade') {
+            } else if (this.options.transitionEffect === "fade") {
                 // normal fade
                 if (curPage && curPage.length > 0) {
-                    curPage.fadeOut('fast', this.options.transitionEasing, function () {
-                        selPage.fadeIn('fast', mi.options.transitionEasing, function () {
-                            $(this).show();
-                        });
-                    });
+                    curPage.fadeOut(
+                        "fast",
+                        this.options.transitionEasing,
+                        function () {
+                            selPage.fadeIn(
+                                "fast",
+                                mi.options.transitionEasing,
+                                function () {
+                                    $(this).show();
+                                }
+                            );
+                        }
+                    );
                 } else {
-                    selPage.fadeIn(this.options.transitionSpeed, this.options.transitionEasing, function () {
-                        $(this).show();
-                    });
+                    selPage.fadeIn(
+                        this.options.transitionSpeed,
+                        this.options.transitionEasing,
+                        function () {
+                            $(this).show();
+                        }
+                    );
                 }
             } else {
                 if (curPage && curPage.length > 0) {
@@ -460,35 +606,57 @@
             this.current_index = idx;
 
             // Trigger "showStep" event
-            this._triggerEvent("showStep", [selTab, this.current_index, stepDirection, stepPosition]);
+            this._triggerEvent("showStep", [
+                selTab,
+                this.current_index,
+                stepDirection,
+                stepPosition,
+            ]);
             return true;
         },
         _setAnchor: function (idx) {
             // Current step anchor > Remove other classes and add done class
-            this.steps.eq(this.current_index).parent('li').removeClass("active");
-            if (this.options.anchorSettings.markDoneStep !== false && this.current_index !== null) {
-                this.steps.eq(this.current_index).parent('li').addClass("done");
-                if (this.options.anchorSettings.removeDoneStepOnNavigateBack !== false) {
-                    this.steps.eq(idx).parent('li').nextAll().removeClass("done");
+            this.steps
+                .eq(this.current_index)
+                .parent("li")
+                .removeClass("active");
+            if (
+                this.options.anchorSettings.markDoneStep !== false &&
+                this.current_index !== null
+            ) {
+                this.steps.eq(this.current_index).parent("li").addClass("done");
+                if (
+                    this.options.anchorSettings.removeDoneStepOnNavigateBack !==
+                    false
+                ) {
+                    this.steps
+                        .eq(idx)
+                        .parent("li")
+                        .nextAll()
+                        .removeClass("done");
                 }
             }
 
             // Next step anchor > Remove other classes and add active class
-            this.steps.eq(idx).parent('li').removeClass("done").addClass("active");
+            this.steps
+                .eq(idx)
+                .parent("li")
+                .removeClass("done")
+                .addClass("active");
             return true;
         },
         _setButtons: function (idx) {
             // Previous/Next Button enable/disable based on step
             if (!this.options.cycleSteps) {
                 if (0 >= idx) {
-                    $('.sw-btn-prev', this.main).addClass("disabled");
+                    $(".sw-btn-prev", this.main).addClass("disabled");
                 } else {
-                    $('.sw-btn-prev', this.main).removeClass("disabled");
+                    $(".sw-btn-prev", this.main).removeClass("disabled");
                 }
                 if (this.steps.length - 1 <= idx) {
-                    $('.sw-btn-next', this.main).addClass("disabled");
+                    $(".sw-btn-next", this.main).addClass("disabled");
                 } else {
-                    $('.sw-btn-next', this.main).removeClass("disabled");
+                    $(".sw-btn-next", this.main).removeClass("disabled");
                 }
             }
             return true;
@@ -517,8 +685,17 @@
         _fixHeight: function (idx) {
             // Auto adjust height of the container
             if (this.options.autoAdjustHeight) {
-                var selPage = this.steps.eq(idx).length > 0 ? $(this.steps.eq(idx).attr("href"), this.main) : null;
-                this.container.finish().animate({ minHeight: selPage.outerHeight() }, this.options.transitionSpeed, function () {});
+                var selPage =
+                    this.steps.eq(idx).length > 0
+                        ? $(this.steps.eq(idx).attr("href"), this.main)
+                        : null;
+                this.container
+                    .finish()
+                    .animate(
+                        { minHeight: selPage.outerHeight() },
+                        this.options.transitionSpeed,
+                        function () {}
+                    );
             }
             return true;
         },
@@ -538,14 +715,14 @@
         },
         _loader: function (action) {
             switch (action) {
-                case 'show':
-                    this.main.addClass('sw-loading');
+                case "show":
+                    this.main.addClass("sw-loading");
                     break;
-                case 'hide':
-                    this.main.removeClass('sw-loading');
+                case "hide":
+                    this.main.removeClass("sw-loading");
                     break;
                 default:
-                    this.main.toggleClass('sw-loading');
+                    this.main.toggleClass("sw-loading");
             }
         },
 
@@ -555,9 +732,9 @@
             if (this.options.theme === v) {
                 return false;
             }
-            this.main.removeClass('sw-theme-' + this.options.theme);
+            this.main.removeClass("sw-theme-" + this.options.theme);
             this.options.theme = v;
-            this.main.addClass('sw-theme-' + this.options.theme);
+            this.main.addClass("sw-theme-" + this.options.theme);
             // Trigger "themeChanged" event
             this._triggerEvent("themeChanged", [this.options.theme]);
         },
@@ -581,8 +758,8 @@
             this._setURLHash(this.steps.eq(this.options.selected).attr("href"));
             $(".sw-toolbar", this.main).remove();
             this.steps.removeClass();
-            this.steps.parents('li').removeClass();
-            this.steps.data('has-content', false);
+            this.steps.parents("li").removeClass();
+            this.steps.data("has-content", false);
             this.init();
 
             // Trigger "endReset" event
@@ -596,27 +773,27 @@
             });
             if (selSteps && selSteps.length > 0) {
                 switch (state) {
-                    case 'disable':
-                        $(selSteps).parents('li').addClass('disabled');
+                    case "disable":
+                        $(selSteps).parents("li").addClass("disabled");
                         break;
-                    case 'enable':
-                        $(selSteps).parents('li').removeClass('disabled');
+                    case "enable":
+                        $(selSteps).parents("li").removeClass("disabled");
                         break;
-                    case 'hide':
-                        $(selSteps).parents('li').addClass('hidden');
+                    case "hide":
+                        $(selSteps).parents("li").addClass("hidden");
                         break;
-                    case 'show':
-                        $(selSteps).parents('li').removeClass('hidden');
+                    case "show":
+                        $(selSteps).parents("li").removeClass("hidden");
                         break;
-                    case 'error-on':
-                        $(selSteps).parents('li').addClass('danger');
+                    case "error-on":
+                        $(selSteps).parents("li").addClass("danger");
                         break;
-                    case 'error-off':
-                        $(selSteps).parents('li').removeClass('danger');
+                    case "error-off":
+                        $(selSteps).parents("li").removeClass("danger");
                         break;
                 }
             }
-        }
+        },
     });
 
     // Wrapper for the plugin
@@ -624,21 +801,31 @@
         var args = arguments;
         var instance;
 
-        if (options === undefined || typeof options === 'object') {
+        if (options === undefined || typeof options === "object") {
             return this.each(function () {
                 if (!$.data(this, "smartWizard")) {
                     $.data(this, "smartWizard", new SmartWizard(this, options));
                 }
             });
-        } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-            instance = $.data(this[0], 'smartWizard');
+        } else if (
+            typeof options === "string" &&
+            options[0] !== "_" &&
+            options !== "init"
+        ) {
+            instance = $.data(this[0], "smartWizard");
 
-            if (options === 'destroy') {
-                $.data(this, 'smartWizard', null);
+            if (options === "destroy") {
+                $.data(this, "smartWizard", null);
             }
 
-            if (instance instanceof SmartWizard && typeof instance[options] === 'function') {
-                return instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+            if (
+                instance instanceof SmartWizard &&
+                typeof instance[options] === "function"
+            ) {
+                return instance[options].apply(
+                    instance,
+                    Array.prototype.slice.call(args, 1)
+                );
             } else {
                 return this;
             }

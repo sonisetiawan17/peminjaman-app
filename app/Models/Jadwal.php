@@ -14,4 +14,9 @@ class Jadwal extends Model
     protected $primaryKey = 'id_jadwal';
 
     protected $guarded = ['id_jadwal'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

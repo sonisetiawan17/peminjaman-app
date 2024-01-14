@@ -1,8 +1,41 @@
+let currentStep = 1;
+
+function showStep(step) {
+    document.querySelectorAll(".step").forEach((s) => {
+        s.style.display = "none";
+    });
+    document.querySelector(`.step${step}`).style.display = "block";
+
+    document.getElementById("prevBtn").disabled = step === 1;
+    document.getElementById("nextBtn").style.display =
+        step === 2 ? "none" : "inline";
+    document.getElementById("submitBtn").style.display =
+        step === 2 ? "inline" : "none";
+}
+
+function nextStep() {
+    if (currentStep < 2) {
+        currentStep++;
+        showStep(currentStep);
+    }
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+    }
+}
+
+showStep(currentStep);
+
+// ==============================================
+
 const nama = document.getElementById("name");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password_confirmation = document.getElementById("password_confirmation");
-const button = document.querySelector(".next");
+const button = document.getElementById("nextBtn");
 
 function checkAndChangeButtonColor(
     userName,
@@ -21,7 +54,6 @@ function checkAndChangeButtonColor(
     const isPasswordConfValid = userPasswordConf.length > 6;
 
     if (isName && isEmailValid && isPasswordValid && isPasswordConfValid) {
-        button.removeAttribute("disabled");
         button.style.backgroundColor = "#5465ff";
         button.style.color = "white";
         button.style.cursor = "pointer";
@@ -35,7 +67,6 @@ function checkAndChangeButtonColor(
             button.style.backgroundColor = "#5465ff";
         });
     } else {
-        button.setAttribute("disabled", true);
         button.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
         button.style.color = "rgba(0, 0, 0, 0.5)";
         button.style.cursor = "not-allowed";
@@ -97,107 +128,106 @@ const no_telp = document.getElementById("no_telp");
 const alamat = document.getElementById("alamat");
 const nama_organisasi = document.getElementById("nama_organisasi");
 const instansi = document.getElementById("instansi");
-const buttonRegister = document.querySelector(".btn-submit");
+const buttonRegister = document.getElementById("submitBtn");
 
-function checkAndChangeButtonColorStep(
-    userNik,
-    userNoTelp,
-    userAlamat,
-    userNamaOrganisasi,
-    userInstansi
-) {
-    const isNik = userNik.length > 1;
-    const isNoTelp = userNoTelp.length > 1;
-    const isAlamat = userAlamat.length > 1;
-    const isNamaOrganisasi = userNamaOrganisasi.length > 0;
+// function checkAndChangeButtonColor(
+//     userNik,
+//     userNoTelp,
+//     userAlamat,
+//     userNamaOrganisasi,
+//     userInstansi
+// ) {
+//     const userNik = userNik.length > 15;
+//     const userNoTelp = userNoTelp.length > 10;
+//     const userAlamat = userAlamat.length > 6;
+//     const userNamaOrganisasi = userNamaOrganisasi.length > 0;
+//     const userInstansi = userInstansi.length > 0;
 
-    if (
-        userNik &&
-        userNoTelp &&
-        userAlamat &&
-        userNamaOrganisasi &&
-        userInstansi
-    ) {
-        buttonRegister.removeAttribute("disabled");
-        buttonRegister.style.backgroundColor = "#5465ff";
-        buttonRegister.style.color = "white";
-        buttonRegister.style.cursor = "pointer";
-        buttonRegister.style.transitionDuration = "300ms";
+//     if (
+//         userNik &&
+//         userNoTelp &&
+//         userAlamat &&
+//         userNamaOrganisasi &&
+//         userInstansi
+//     ) {
+//         buttonRegister.style.backgroundColor = "#5465ff";
+//         buttonRegister.style.color = "white";
+//         buttonRegister.style.cursor = "pointer";
+//         buttonRegister.style.transitionDuration = "300ms";
 
-        buttonRegister.addEventListener("mouseover", function () {
-            buttonRegister.style.backgroundColor = "rgba(84, 101, 255, 0.8)";
-        });
+//         buttonRegister.addEventListener("mouseover", function () {
+//             buttonRegister.style.backgroundColor = "rgba(84, 101, 255, 0.8)";
+//         });
 
-        buttonRegister.addEventListener("mouseout", function () {
-            buttonRegister.style.backgroundColor = "#5465ff";
-        });
-    } else {
-        buttonRegister.setAttribute("disabled", true);
-        buttonRegister.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
-        buttonRegister.style.color = "rgba(0, 0, 0, 0.5)";
-        buttonRegister.style.cursor = "not-allowed";
+//         buttonRegister.addEventListener("mouseout", function () {
+//             buttonRegister.style.backgroundColor = "#5465ff";
+//         });
+//     } else {
+//         buttonRegister.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
+//         buttonRegister.style.color = "rgba(0, 0, 0, 0.5)";
+//         buttonRegister.style.cursor = "not-allowed";
 
-        buttonRegister.addEventListener("mouseover", function () {
-            buttonRegister.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
-        });
+//         buttonRegister.addEventListener("mouseover", function () {
+//             buttonRegister.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
+//         });
 
-        buttonRegister.addEventListener("mouseout", function () {
-            buttonRegister.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
-        });
-    }
-}
+//         buttonRegister.addEventListener("mouseout", function () {
+//             buttonRegister.style.backgroundColor = "rgba(44, 62, 80, 0.1)";
+//         });
+//     }
+// }
 
 nik.addEventListener("input", function (event) {
     const nikValue = event.target.value;
-    checkAndChangeButtonColorStep(
+    checkAndChangeButtonColor(
         nikValue,
-        instansi.value,
         no_telp.value,
         alamat.value,
-        nama_organisasi.value
+        nama_organisasi.value,
+        instansi.value
     );
 });
 
 no_telp.addEventListener("input", function (event) {
     const noTelpValue = event.target.value;
-    checkAndChangeButtonColorStep(
+    checkAndChangeButtonColor(
         nik.value,
-        instansi.value,
         noTelpValue,
         alamat.value,
-        nama_organisasi.value
+        nama_organisasi.value,
+        instansi.value
     );
 });
 
 alamat.addEventListener("input", function (event) {
     const alamatValue = event.target.value;
-    checkAndChangeButtonColorStep(
+    checkAndChangeButtonColor(
         nik.value,
-        instansi.value,
         no_telp.value,
         alamatValue,
-        nama_organisasi.value
+        nama_organisasi.value,
+        instansi.value
     );
 });
 
 nama_organisasi.addEventListener("input", function (event) {
     const namaOrganisasiValue = event.target.value;
-    checkAndChangeButtonColorStep(
+    checkAndChangeButtonColor(
         nik.value,
-        instansi.value,
         no_telp.value,
-        alamat.value,
-        namaOrganisasiValue
+        alamatValue,
+        namaOrganisasiValue,
+        instansi.value
     );
 });
 
 instansi.addEventListener("input", function (event) {
     const instansiValue = event.target.value;
-    checkAndChangeButtonColorStep(
+    checkAndChangeButtonColor(
         nik.value,
-        instansiValue,
         no_telp.value,
-        alamat.value,
-        nama_organisasi.value
+        alamatValue,
+        nama_organisasi.value,
+        instansiValue
     );
 });

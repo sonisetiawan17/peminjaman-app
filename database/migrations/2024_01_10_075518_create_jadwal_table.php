@@ -15,9 +15,10 @@ class CreateJadwalTable extends Migration
     {
         Schema::create('jadwal', function (Blueprint $table) {
             $table->increments('id_jadwal');
-            $table->date('tgl_jadwal_mulai');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->date('tgl_mulai');
             $table->time('jam_mulai');
-            $table->date('tgl_jadwal_selesai');
+            $table->date('tgl_selesai');
             $table->time('jam_selesai');
             $table->timestamps();
         });

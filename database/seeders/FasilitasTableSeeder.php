@@ -16,7 +16,7 @@ class FasilitasTableSeeder extends Seeder
     {
         $fasilitas = [
             [
-                'nama_fasilitas' => 'Multimedia'
+                'nama_fasilitas' => 'Multimedia',
             ],
             [
                 'nama_fasilitas' => 'Aula'
